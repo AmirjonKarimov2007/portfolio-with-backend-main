@@ -5,7 +5,12 @@
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Amirjon Karimov | Blog</title>
+       
+            {%for i in home_defaults%}
+                <title>{{i}}</title>
+            {%endfor%}
+        
+
         <meta name="robots" content="noindex, follow" />
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

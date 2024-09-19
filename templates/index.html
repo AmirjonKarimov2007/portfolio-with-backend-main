@@ -9,7 +9,7 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amirjon Karimov | Blog</title>
+    <title>Amirjon Karsasadimov | Blog</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -146,7 +146,9 @@
                         <div class="col-xxl-7">
                             <div class="hero-content">
                                 <h3 class="title-big">Hello! I’m</h3>
-                                <h2 class="title-large">Amirjon <span class="shape-mark">Karimov</span></h2>
+                                {%for defaults in home_defaults%}
+                                <h2 class="title-large">{{ defaults.name|slice:":7" }}<span class="shape-mark">{{ defaults.name|slice:"7:" }}</span></h2>
+                                {%endfor%}
                                 <p>Fullstack Developer specializing in Python, Django & Aiogram.</p>
 
                                 <a href="{% static 'Amirjon_Karimov_CV.pdf' %}" download class="btn btn-xl btn-outline-one icon-space-left">

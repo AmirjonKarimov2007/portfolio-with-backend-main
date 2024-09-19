@@ -1,0 +1,3 @@
+django-jazzmin
+django==5
+pillow
