@@ -35,14 +35,12 @@ class SocialMarkets(models.Model):
     def __str__(self) -> str:
         return self.phone_number
 
-class Static(models.Model):
-    resume = models.FileField(verbose_name="resume")
-    happy_clients = models.IntegerField(verbose_name="Hursand Mijozlar")
-    project_complate = models.IntegerField(verbose_name="Muvaffaqiyatli loyihalar")
-    experience = models.IntegerField(verbose_name="Tajriba")
-    static = models.ForeignKey(HomeDefault,on_delete=models.PROTECT,related_name="statics")
+class Statics(models.Model):
+    happy_clients = models.BigIntegerField(verbose_name="Hursand Mijozlar")
+    project_complate = models.BigIntegerField(verbose_name="Muvaffaqiyatli loyihalar")
+    experience = models.BigIntegerField(verbose_name="Tajriba")
     def __str__(self) -> str:
-        return self.happy_clients
+        return str(self.happy_clients)
     
 
 

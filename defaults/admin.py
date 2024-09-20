@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import HomeDefault, Skill, SocialMarkets, Static, Company
+from .models import HomeDefault, Skill, SocialMarkets, Statics, Company
 
 @admin.register(HomeDefault)
 class HomeDefaultAdmin(admin.ModelAdmin):
@@ -15,9 +15,9 @@ class SocialMarketsAdmin(admin.ModelAdmin):
     list_display = ('email_address', 'linkedin', 'instagram', 'telegram', 'facebook', 'youtube', 'fiverr', 'upwork', 'phone_number')
     search_fields = ('email_address', 'linkedin', 'instagram')
 
-@admin.register(Static)
+@admin.register(Statics)
 class StaticAdmin(admin.ModelAdmin):
-    list_display = ('resume', 'happy_clients', 'project_complate', 'experience')
+    list_display = ( 'happy_clients', 'project_complate', 'experience')
     
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):

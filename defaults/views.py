@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import HomeDefault, Skill, SocialMarkets, Static, Company
+from .models import HomeDefault, Skill, SocialMarkets, Statics, Company
 
 def redirect_to_defaults(request):
     """Redirect to the defaults home page."""
@@ -10,7 +10,7 @@ def defaults(request):
     home_defaults = HomeDefault.objects.all()
     skills = Skill.objects.all()
     social_markets = SocialMarkets.objects.all()
-    statistics = Static.objects.all()
+    statistics = Statics.objects.all()
     companies = Company.objects.all()
     print(home_defaults)
     data = {

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView,ListView,DetailView
 from .models import Service,Project
 # Create your views here.
-from defaults.models import HomeDefault, Skill, SocialMarkets, Static, Company
+from defaults.models import HomeDefault, Skill, SocialMarkets, Statics, Company
 
 class HomePageView(ListView):
     model = Service
@@ -10,14 +10,14 @@ class HomePageView(ListView):
     context_object_name = 'object_list'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        home = HomeDefault.objects.all()
         
         # Fetching data from the defaults app
-        context['home_defaults'] = HomeDefault.objects.all()
+        context['home_defaults'] = home
         context['skills'] = Skill.objects.all()
         context['social_markets'] = SocialMarkets.objects.all()
-        context['statistics'] = Static.objects.all()
+        context['statistics'] = Statics.objects.all()
         context['companies'] = Company.objects.all()
-        
         return context
 # Services List
 class ServicePageView(ListView):
