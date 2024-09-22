@@ -83,17 +83,23 @@ class ProjectPhoto(models.Model):
     def __str__(self) -> str:
         return self.photos.name
 
+class Tag(models.Model):
+    title = models.CharField(verbose_name="hashtag nomi:",max_length=200)
+    def __str__(self) -> str:
+        return self.title
+    
 class Project(models.Model):
     title = models.CharField(max_length=300)
-    project_name = models.CharField(max_length=100, null=True, blank=True)
     subtitle = models.CharField(max_length=300)
     optimal_text = models.ManyToManyField(ProjectText,editable=True, verbose_name="Hoqishiy tekslar")
     description = models.TextField(blank=True, null=True, verbose_name="Xizmat haqida")
+    hashtag = models.ManyToManyField(Tag)
     photo = models.ManyToManyField(ProjectPhoto)
     filter = models.ForeignKey(
         ProjectFilter,
         on_delete=models.CASCADE
     )
+    project_name = models.CharField(max_length=100, null=True, blank=True)
     clients = models.CharField(max_length=255)
     budget = models.DecimalField(max_digits=10, decimal_places=2)
     duration = models.IntegerField(help_text="Duration in days")
@@ -111,3 +117,55 @@ class Project(models.Model):
         return [self.description[i:i+chunk_size] for i in range(0, len(self.description), chunk_size)]
     def split_footer_text(self, chunk_size=330):
         return [self.footer_text[i:i+chunk_size] for i in range(0, len(self.footer_text), chunk_size)]
+
+
+
+
+# Blog Model
+class Category(models.Model):
+    name = models.CharField(verbose_name="Category name",max_length=250)
+    slug = models.SlugField(max_length=250, unique=True)
+    
+    def __str__(self):
+        return str(self.name)
+
+class BlogTag(models.Model):
+    name = models.CharField(verbose_name="Tag name",max_length=250)
+    slug = models.SlugField(max_length=250, unique=True)
+    
+    def __str__(self):
+        return str(self.name)
+
+from django.db import models
+from django.contrib.auth.models import User
+
+class Post(models.Model):
+    title = models.CharField(verbose_name="Post title", max_length=550)
+    author = models.CharField(verbose_name="Post author", default="Admin", max_length=100)
+    image = models.ImageField(upload_to='blog_images/')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='posts')
+    publish_date = models.DateTimeField(verbose_name="Published time", auto_now_add=True)
+    published = models.BooleanField(default=True)
+    on_top = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+    def total_likes(self):
+        return self.likes.count()  # 'likes' orqali Layklarni hisoblash
+
+class Like(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
+    ip_address = models.GenericIPAddressField()
+
+    def __str__(self):
+        return f'Like from {self.ip_address} for post {self.post.title}'
+
+class Comment(models.Model):
+    author = models.CharField(verbose_name="Comment author", max_length=100, blank=False)
+    comment = models.TextField(verbose_name="Comment")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    image = models.ImageField(upload_to='comment_images/', blank=True, null=True)  # Rasm saqlash uchun
+
+    def __str__(self):
+        return str(self.author)

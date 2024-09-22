@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
        
             {%for i in home_defaults%}
-                <title>{{i}}</title>
+                <title>{{i.title}}</title>
             {%endfor%}
         
 
@@ -52,11 +52,11 @@
                             <li class="has-dropdown">
                                 <a href="blog-list.html">Blog</a>
                                 <ul class="submenu">
-                                    <li><a href="blog-list.html">Blog List Full Width</a></li>
-                                    <li><a href="blog-list-sidebar-left.html">Blog List Left Sidebar</a></li>
-                                    <li><a href="blog-list-sidebar-right.html">Blog List Right Sidebar</a></li>
-                                    <li><a href="blog-details.html">Blog Details Full Width</a></li>
-                                    <li><a href="blog-details-sidebar-left.html">Blog Details Left Sidebar</a></li>
+                                    <!-- <li><a href="blog-list.html">Blog List Full Width</a></li> -->
+                                    <!-- <li><a href="blog-list-sidebar-left.html">Blog List Left Sidebar</a></li> -->
+                                    <li><a href="{%url 'blog'%}">Blog List Right Sidebar</a></li>
+                                    <!-- <li><a href="blog-details.html">Blog Details Full Width</a></li> -->
+                                    <!-- <li><a href="blog-details-sidebar-left.html">Blog Details Left Sidebar</a></li> -->
                                     <li><a href="blog-details-sidebar-right.html">Blog Details Right Sidebar</a></li>
                                 </ul>
                             </li>
@@ -78,16 +78,177 @@
                     </div>
                     <div class="col">
                         <div class="header-btn-link text-end">
-                            <a href="contact.html" class="btn btn-sm btn-outline-one icon-space-left">Hire Me <i class="icofont-double-right"></i></a>
-                        </div>
+                            <a href="contact.html" class="btn btn-sm btn-outline-one icon-space-left">Hire Me <i class="icofont-double-right"></i></a>                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    <div class="mobile-header d-block d-lg-none">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col">
+                    <div class="mobile-logo">
+                        <a href="{%url 'home'%}"><img src="{%static 'assets/images/logo/logo.png'%}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mobile-action-link text-end">
+                        <a href="#mobile-menu-offcanvas" class="offcanvas-toggle offside-menu"><i class="icofont-navigation-menu"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .....:::::: Start MobileHeader Section :::::.... -->
 
+    <!--  Start Offcanvas Mobile Menu Section -->
+    <div id="mobile-menu-offcanvas" class="offcanvas offcanvas-rightside offcanvas-mobile-menu-section">
+        <!-- Start Offcanvas Header -->
+        <div class="offcanvas-header text-end">
+            <button class="offcanvas-close"><i class="icofont-close-line"></i></button>
+        </div>
+        <!-- End Offcanvas Header -->
+        <!-- Start Offcanvas Mobile Menu Wrapper -->
+        <div class="offcanvas-mobile-menu-wrapper">
+            <!-- Start Mobile Menu  -->
+            <div class="mobile-menu-bottom">
+                <!-- Start Mobile Menu Nav -->
+                <div class="offcanvas-menu">
+                    <ul>
+                        <li>
+                            <a href="{%url 'home'%}"><span>Home</span></a>
+                        </li>
+                        <li>
+                            <a href="{%url 'services'%}">Services</a></li>
+                            
+                        </li>
+                        <li>
+                            <a href="#"><span>Blog</span></a>
+                            <ul class="mobile-sub-menu">
+                                <!-- <li><a href="blog-list.html">Blog List Full Width</a></li> -->
+                                <!-- <li><a href="blog-list-sidebar-left.html">Blogs List Left Sidebar</a></li> -->
+                                <li><a href="blog-list-sidebar-right.html">Blog List Right Sidebar</a></li>
+                                <!-- <li><a href="blog-details.html">Blog Details Full Width</a></li> -->
+                                <!-- <li><a href="blog-details-sidebar-left.html">Blog Details Left Sidebar</a></li> -->
+                                <li><a href="blog-details-sidebar-right.html">Blog Details Right Sidebar</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span>Pages</span></a>
+                            <ul class="mobile-sub-menu">
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="{% url 'projects' %}">Project</a></li>
+                            </ul>
+                        </li>   
+                        <li>
+                            <a href="contact.html"><span>Contact</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Mobile Menu Nav -->
+            </div>
+            <!-- End Mobile Menu -->
+
+            <!-- Start Mobile contact Info -->
+            <div class="mobile-contact-info text-center">
+                <ul class="social-link">
+                                <li><a href="https://www.t.me/Amairjon_Karimov_Blog" target="_blank"><i class="icofont-telegram"></i></a></li>
+                                <li><a href="https://www.instagram.com/amirjonkarimov.blog" target="_blank"><i class="icofont-instagram"></i></a></li>
+                                <li><a href="https://www.youtube.com/@AmirjonKarimovBlog" target="_blank"><i class="icofont-youtube"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/amirjon-karimov-6827b1256/" target="_blank"><i class="icofont-linkedin"></i></a></li>
+                </ul>
+            </div>
+            <!-- End Mobile contact Info -->
+
+        </div>
+        <!-- End Offcanvas Mobile Menu Wrapper -->
+    </div>
     {%block content%}
     {%endblock content%}
-    
+    <footer class="footer-section section-bg overflow-hidden pos-relative">
+        <div class="footer-inner-shape-top-left"></div>
+        <div class="footer-inner-shape-top-right"></div>
+        <div class="footer-section-top section-gap-t-165">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Start Section Content -->
+                        <div class="section-content pos-relative text-center">
+                            <span class="section-tag">Get Latest Updates</span>
+                            <h2 class="section-title">Subscribe For Newsletter</h2>
+                        </div>
+                        <!-- End Section Content -->
+                    </div>
+                </div>
+                <div class="footer-top-wrapper text-center">
+                    <div class="row">
+                        <div class="col-12">
+                            <form action="#" class="footer-newsletter">
+                                <input type="email" placeholder="amirjonkarimoff@gmail.com">
+                                <button class="submit-btn" type="submit">Subscribe Now</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-center section-gap-tb-165">
+            <div class="container">
+                <div class="row justify-content-between align-items-center mb-n5">
+                    <div class="col-auto mb-5">
+                        <!-- Start Single Footer Info -->
+                        <div class="footer-single-info">
+                            <a href="tel:+998915200523" class="info-box">
+                                <span class="icon"><i class="icofont-phone"></i></span>
+                                <span class="text">+998-91-520-05-23</span>
+                            </a>
+                        </div>
+                        <!-- Start Single Footer Info -->
+                    </div>
+                    <div class="col-auto mb-5">
+                        <!-- Start Single Footer Info -->
+                        <div class="footer-single-info">
+                            <a href="mailto:amirjonkarimoff@gmail.com" class="info-box">
+                                <span class="icon"><i class="icofont-envelope-open"></i></span>
+                                <span class="text">amirjonkarimoff@gmail.com</span>
+                            </a>
+                        </div>
+                        <!-- Start Single Footer Info -->
+                    </div>
+                    <div class="col-auto mb-5">
+                        <!-- Start Single Footer Info -->
+                        <div class="footer-single-info">
+                            <ul class="social-link">
+                                <li><a href="https://www.t.me/Amirjon_Karimov_Blog" target="_blank"><i class="icofont-telegram"></i></a></li>
+                                <li><a href="https://www.instagram.com/amirjonkarimov.blog" target="_blank"><i class="icofont-instagram"></i></a></li>
+                                <li><a href="https://www.youtube.com/@AmirjonKarimovBlog" target="_blank"><i class="icofont-youtube"></i></a></li>
+                                <li><a href="https://www.linkedin.com/in/amirjon-karimov" target="_blank"><i class="icofont-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- Start Single Footer Info -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row justify-content-center justify-content-md-between align-items-center flex-column-reverse flex-md-row">
+                    <div class="col-auto">
+                        <div class="footer-copyright">
+                            <p class="copyright-text">&copy; 2023 <a href="{%url 'home'%}"></a> Made with <i class="icofont-heart"></i> by <a href="https://amirjonkarimov2007.github.io/portfolio" target="_blank">Amirjon Karimov</a></p>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{%url 'home'%}" class="footer-logo">
+                            <div class="logo">
+                                <img src="{%static 'assets/images/logo/logo.png'%}" alt="">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

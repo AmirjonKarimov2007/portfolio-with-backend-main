@@ -1,10 +1,12 @@
 from django.contrib import admin
-from .models import Service, BasicService, StandardService, PremiumService, ServiceText, FeaturesText, Planstext,Project,ProjectFilter,ProjectText,ProjectPhoto
+from .models import Service, BasicService, StandardService, PremiumService, ServiceText, FeaturesText, Planstext,Project,ProjectFilter,ProjectText,ProjectPhoto,Tag
+
 # Register your models here.
 # --------------------- Services admin panel form ----------------------------------->>>
 admin.site.register(ServiceText)
 admin.site.register(FeaturesText)
 admin.site.register(Planstext)
+admin.site.register(Tag)
 
 
 # -----------------------Packages for admin panel form -------------------------------------->
@@ -58,3 +60,41 @@ admin.site.register(ProjectPhoto)
 admin.site.register(ProjectFilter)
 admin.site.register(ProjectText)
 admin.site.register(Project)
+
+
+
+# Blog section
+
+
+
+
+
+
+
+
+from django.contrib import admin
+from .models import Category,Comment,BlogTag,Post
+# Register your models here.
+
+
+@admin.register(Category)
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name','slug']
+    
+    prepopulated_fields = {"slug":('name',)}
+
+
+
+
+admin.site.register(Comment)
+
+
+
+@admin.register(BlogTag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ['name','slug']
+    
+    prepopulated_fields = {"slug":('name',)}
+
+admin.site.register(Post)

@@ -22,5 +22,4 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('portfolio.urls')),  # Portfolio app
-    path('defaults/', include('defaults.urls', namespace='defaults')),  # Defaults app
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
