@@ -57,8 +57,8 @@
 
                             <!-- Start Sidebar Widget Single Item - Search Widgets -->
                             <div class="sidebar-widget-single-area search-widgets">
-                                <form class="search-widgets-box" action="#" method="post">
-                                    <input type="search" placeholder="Search here">
+                                <form class="search-widgets-box" action="{%url 'search'%}" method="get">
+                                    <input type="search" name="query" placeholder="Search here">
                                     <button><i class="icofont-search-1"></i></button>
                                 </form>
                             </div>
@@ -134,21 +134,19 @@
                                     </a>
                                     <div class="content">
                                         <div class="post-meta-1">
-                                            <a href="#" class="catagory">{{post.category}}</a>
+                                            <a href="{% url 'category_list' category_slug=post.category.slug %}" class="catagory">{{post.category}}</a>
                                             <a href="#" class="date">{{post.publish_date}}</a>
                                         </div>
                                         <h4 class="title"><a href="#">{{post.title}}</a></h4>
 
                                         <div class="post-meta-2">
                                             <a href="#" class="icon-space-right"><i class="icofont-ui-user"></i>{{post.author | title}}</a>
-                                            <a href="{% url 'like_post' request.session.user_id post.pk %}" class="icon-space-right">
-                                                <i class="icofont-heart"></i> {{ post.likes.all.count }}
-                                            </a>
-                                            
-                                            
-                                                                               
+                                            <a href="{% url 'like_post' request.session.user_id post.pk %}" class="icon-space-right"><i class="icofont-heart"></i> {{ post.likes.all.count }}</a>                           
                                             <a href="#" class="icon-space-right"><i class="icofont-speech-comments"></i>{{post.comments.all.count}}</a>
+                                            <a href="{% url 'like_post' request.session.user_id post.pk %}" class="icon-space-right"><i class="icofont-eye"></i>{{ post.views }}</a>                           
+
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 {%endfor%}

@@ -121,3 +121,13 @@ def category_list(request,category_slug):
         "categories":categories,
         "related_posts":related_posts,
         })
+
+
+# Search Deatils
+
+def search(request):
+    related_posts = Post.objects.all().order_by('?')[:10]
+    categories = Category.objects.all().order_by('?')[:4]
+    query = request.GET.get('query')
+    posts = Post.objects.filter(title__icontains=query)
+    return render(request,"blog-list-sidebar-right.html",context={"related_posts":related_posts,"posts":posts,"categories":categories})

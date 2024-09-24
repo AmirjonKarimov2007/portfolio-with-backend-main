@@ -143,9 +143,11 @@ class Post(models.Model):
     author = models.CharField(verbose_name="Post author", default="Admin", max_length=100)
     image = models.ImageField(upload_to='blog_images/')
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='posts')
+    views = models.PositiveIntegerField(default=0)
     publish_date = models.DateTimeField(verbose_name="Published time", auto_now_add=True)
     published = models.BooleanField(default=True)
     on_top = models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.title
@@ -166,3 +168,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return str(self.author)
+
