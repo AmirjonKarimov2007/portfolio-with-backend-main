@@ -135,7 +135,6 @@ class BlogTag(models.Model):
     
     def __str__(self):
         return str(self.name)
-
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -151,15 +150,13 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    def total_likes(self):
-        return self.likes.count()  # 'likes' orqali Layklarni hisoblash
-
+   
 class Like(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
-    ip_address = models.GenericIPAddressField()
-
+    user_id = models.CharField(verbose_name="post likes",max_length=500)
+    
     def __str__(self):
-        return f'Like from {self.ip_address} for post {self.post.title}'
+        return str(self.user_id)
 
 class Comment(models.Model):
     author = models.CharField(verbose_name="Comment author", max_length=100, blank=False)

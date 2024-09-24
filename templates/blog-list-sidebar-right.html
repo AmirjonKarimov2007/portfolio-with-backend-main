@@ -33,10 +33,10 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="breadcrumb-content">
-                                <h2 class="title">Blog List Right Sidebar</h2>
+                                <h2 class="title">My Blog</h2>
                                 <ul class="breadcrumb-link">
-                                    <li><a href="{%url 'blog'%}">Blog</a></li>
-                                    <li class="active" aria-current="page">Blog List Right Sidebar</li>
+                                    <li><a href="{%url 'home'%}">Home</a></li>
+                                    <li class="active" aria-current="page">Blogs</li>
                                 </ul>
                             </div>
                         </div>
@@ -68,10 +68,9 @@
                             <div class="sidebar-widget-single-area catagory-widgets">
                                 <h3 class="title">Category</h3>
                                 <ul class="widget-nav-list catagory-item-list">
-                                    <li><a href="#"><span class="text">UI/UX Design</span><span class="icon"><i class="icofont-double-right"></i></span></a></li>
-                                    <li><a href="#"><span class="text">Web Development</span><span class="icon"><i class="icofont-double-right"></i></span></a></li>
-                                    <li><a href="#"><span class="text">Brand Identity</span><span class="icon"><i class="icofont-double-right"></i></span></a></li>
-                                    <li><a href="#"><span class="text">Digital Marketing</span><span class="icon"><i class="icofont-double-right"></i></span></a></li>
+                                    {%for cat in categories%}
+                                    <li><a href="{% url 'category_list' category_slug=cat.slug %}"><span class="text">{{cat.name}}</span><span class="icon"><i class="icofont-double-right"></i></span></a></li>
+                                    {%endfor%}
                                 </ul>
                             </div>
                             <!-- End Sidebar Widget Single Item - Catagory Widgets -->
@@ -91,50 +90,21 @@
                             <div class="sidebar-widget-single-area recentpost-widget">
                                 <h3 class="title">Recent Post</h3>
                                 <ul class="recent-blog-item-list">
+                                    {%for posts in related_posts%}
                                     <li>
                                         <a href="blog-details-sidebar-left.html" class="image">
-                                            <img src="{% static 'assets/images/blog/recent-blog-img-1.jpg' %}" alt="">
+                                            <img src="{{posts.image.url}}" alt="">
                                         </a>
                                         <div class="content">
-                                            <h4 class="title"><a href="blog-details-sidebar-left.html">Mistakes You Can Easily Avoid. </a></h4>
+                                            <h4 class="title"><a href="blog-details-sidebar-left.html">{{posts.title | title}}</a></h4>
                                             <div class="post-meta">
-                                                <a href="#" class="date icon-space-right"><i class="icofont-calendar"></i> 09 Apr, 2021</a>
+                                                <a href="#" class="date icon-space-right"><i class="icofont-calendar"></i> {{posts.publish_date}}</a>
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <a href="blog-details-sidebar-left.html" class="image">
-                                            <img src="{% static 'assets/images/blog/recent-blog-img-2.jpg' %}" alt="">
-                                        </a>
-                                        <div class="content">
-                                            <h4 class="title"><a href="blog-details-sidebar-left.html">We take your amazing journey.</a> </h4>
-                                            <div class="post-meta">
-                                                <a href="#" class="date icon-space-right"><i class="icofont-calendar"></i> 10 Apr, 2021</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="blog-details-sidebar-left.html" class="image">
-                                            <img src="{%static 'assets/images/blog/recent-blog-img-3.jpg'%}" alt="">
-                                        </a>
-                                        <div class="content">
-                                            <h4 class="title"><a href="blog-details-sidebar-left.html">Things About Portfolio.</a> </h4>
-                                            <div class="post-meta">
-                                                <a href="#" class="date icon-space-right"><i class="icofont-calendar"></i> 13 Apr, 2021</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="blog-details-sidebar-left.html" class="image">
-                                            <img src="{%static 'assets/images/blog/recent-blog-img-4.jpg'%}" alt="">
-                                        </a>
-                                        <div class="content">
-                                            <h4 class="title"><a href="blog-details-sidebar-left.html">Everyone Should Know .</a> </h4>
-                                            <div class="post-meta">
-                                                <a href="#" class="date icon-space-right"><i class="icofont-calendar"></i> 15 Apr, 2021</a>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    {%endfor%}
+                                    
+                                    
                                 </ul>
                             </div>
                             <!-- End Sidebar Widget Single Item - Recent Post Widgets -->
@@ -143,9 +113,9 @@
                             <div class="sidebar-widget-single-area ">
                                 <h3 class="title">Follow Me</h3>
                                 <ul class="social-link">
-                                    <li><a href="https://www.example.com" target="_blank"><i class="icofont-facebook"></i></a></li>
-                                    <li><a href="https://www.example.com" target="_blank"><i class="icofont-dribbble"></i></a></li>
-                                    <li><a href="https://www.example.com" target="_blank"><i class="icofont-linkedin"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/amirjon-karimov" target="_blank"><i class="icofont-linkedin"></i></a></li>
+                                    <li><a href="https://www.instagram.com/amirjonkarimov.blog" target="_blank"><i class="icofont-instagram"></i></a></li>
+                                    <li><a href="https://www.t.me/Amirjon_Karimov_Blog" target="_blank"><i class="icofont-telegram"></i></a></li>
                                 </ul>
                             </div>
                             <!-- End Sidebar Widget Single Item - Social Widgets -->
@@ -170,10 +140,14 @@
                                         <h4 class="title"><a href="#">{{post.title}}</a></h4>
 
                                         <div class="post-meta-2">
-                                            <a href="#" class="icon-space-right"><i class="icofont-ui-user"></i>{{post.author}}</a>
-                                            <a href="{% url 'like_post' post.pk %}" class="icon-space-right">
-                                                <i class="icofont-heart"></i> {{ post.total_likes }}
-                                            </a>                                             <a href="#" class="icon-space-right"><i class="icofont-speech-comments"></i>{{post.comments.all.count}}</a>
+                                            <a href="#" class="icon-space-right"><i class="icofont-ui-user"></i>{{post.author | title}}</a>
+                                            <a href="{% url 'like_post' request.session.user_id post.pk %}" class="icon-space-right">
+                                                <i class="icofont-heart"></i> {{ post.likes.all.count }}
+                                            </a>
+                                            
+                                            
+                                                                               
+                                            <a href="#" class="icon-space-right"><i class="icofont-speech-comments"></i>{{post.comments.all.count}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -208,75 +182,7 @@
         <!-- ...::: End Blog List Section :::... -->
 
         <!-- ...::: Start Company Logo Display Section :::... -->
-        <div class="company-logo-display section-gap-tb-165">
-            <div class="company-logo-display-box">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <!-- Start Section Content -->
-                            <div class="section-content pos-relative">
-                                <span class="section-tag">Favourite Clients</span>
-                                <h2 class="section-title">Work With Trusted Comapny.</h2>
-                            </div>
-                            <!-- End Section Content -->
-                        </div>
-                    </div>
-
-                    <div class="company-logo-display-wrapper">
-                        <div class="row">
-                            <div class="col">
-                                <div class="company-logo-display-slider">
-                                    <!-- Slider main container -->
-                                    <div class="swiper-container">
-                                        <!-- Additional required wrapper -->
-                                        <div class="swiper-wrapper">
-                                            <!-- Start Company Logo Slider Single Item -->
-                                            <div class="company-logo-single-item swiper-slide">
-                                                <a href="#" class="image">
-                                                    <img src="assets/images/company-logo/company-logo-1.png" alt="">
-                                                    <img src="assets/images/company-logo/1.png" alt="">
-                                                </a>
-                                            </div>
-                                            <!-- End Company Logo Slider Single Item -->
-                                            <!-- Start Company Logo Slider Single Item -->
-                                            <div class="company-logo-single-item swiper-slide">
-                                                <a href="#" class="image">
-                                                    <img src="assets/images/company-logo/company-logo-2.png" alt="">
-                                                    <img src="assets/images/company-logo/2.png" alt="">
-                                                </a>
-                                            </div>
-                                            <!-- End Company Logo Slider Single Item -->
-                                            <!-- Start Company Logo Slider Single Item -->
-                                            <div class="company-logo-single-item swiper-slide">
-                                                <a href="#" class="image">
-                                                    <img src="assets/images/company-logo/company-logo-3.png" alt="">
-                                                    <img src="assets/images/company-logo/3.png" alt="">
-                                                </a>
-                                            </div>
-                                            <!-- End Company Logo Slider Single Item -->
-                                            <!-- Start Company Logo Slider Single Item -->
-                                            <div class="company-logo-single-item swiper-slide">
-                                                <a href="#" class="image">
-                                                    <img src="assets/images/company-logo/company-logo-4.png" alt="">
-                                                    <img src="assets/images/company-logo/4.png" alt="">
-                                                </a>
-                                            </div>
-                                            <!-- End Company Logo Slider Single Item -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ...::: End Company Logo Display Section :::... -->
-
-        <!-- ...::: Start Footer Section :::... -->
-        
-        <!-- ...::: End Footer Section :::... -->
-        <!-- material-scrolltop button -->
+        <br><br><br>
         <button class="material-scrolltop" type="button"></button>
     </main>
 

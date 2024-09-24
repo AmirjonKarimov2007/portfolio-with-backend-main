@@ -3,6 +3,12 @@ from django.views.generic import TemplateView,ListView,DetailView
 from .models import Service,Project
 # Create your views here.
 from defaults.models import HomeDefault, Skill, SocialMarkets, Statics, Company
+import uuid
+from django.shortcuts import redirect, get_object_or_404
+from .models import Post, Like
+from .utils import check_click_likes
+
+
 
 class HomePageView(ListView):
     model = Service
@@ -55,29 +61,63 @@ class ProjectDetailsView(DetailView):
     template_name = 'project-details.html'
     model = Project
 
-from .models import Post,Category,BlogTag,Comment
+from .models import Post,Category,BlogTag,Comment,Like
+
+
+# Blog Sahifasi
+# Blog Sahifasi
+# Blog Sahifasi
+
+
 def rightblogview(request):
+    user_id = assign_user_id(request)
+    categories = Category.objects.all().order_by('?')[:4]
     posts = Post.objects.all()
-    return render(request,'blog-list-sidebar-right.html',context={'posts':posts})
+    related_posts = Post.objects.all()
+    return render(request,'blog-list-sidebar-right.html',context=
+    {'posts': posts, 
+     'user_id': user_id,
+     "categories":categories,
+     "related_posts":related_posts
+     }
+     )
 
 
+def assign_user_id(request):
+    if not request.session.get('user_id'):
+        request.session['user_id'] = str(uuid.uuid4())
+    
+    return request.session['user_id']
 
-
-
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect
-from .models import Post, Like
-
-def like_post(request, pk):
+def likes_view(request, user_id, pk):
     post = get_object_or_404(Post, id=pk)
-    user_ip = request.META.get('REMOTE_ADDR')  # Foydalanuvchining IP manzilini olish
     
-    # Foydalanuvchining IP manzili bilan Like ni qidiramiz
-    existing_like = Like.objects.filter(post=post, ip_address=user_ip).first()
+    # Ensure the session is modified
+    request.session.modified = True
     
-    if existing_like:  # Agar layk mavjud bo'lsa, olib tashlaymiz
-        existing_like.delete()
-    else:  # Aks holda, yangi layk qo'shamiz
-        Like.objects.create(post=post, ip_address=user_ip)
+    # Retrieve list of post IDs that the user has liked
+    liked_posts = check_click_likes(request)
+    
+    if post.pk in liked_posts:
+        # Remove the like if the post was already liked
+        liked_posts.remove(post.pk)
+        Like.objects.filter(post=post, user_id=user_id).delete()
+    else:
+        # Add the like if the post was not liked before
+        liked_posts.append(post.pk)
+        Like.objects.create(post=post, user_id=user_id)
+    
+    return redirect('blog')
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+def category_list(request,category_slug):
+    slug = Category.objects.get(slug=category_slug)
+    posts = Post.objects.filter(category=slug)
+    categories = Category.objects.exclude(slug__in=[category_slug]).order_by('?')[:4]
+    related_posts = Post.objects.filter(category=slug)
+
+    return render(request,'blog-list-sidebar-right.html',context={
+        "slug":slug,
+        "posts":posts,
+        "categories":categories,
+        "related_posts":related_posts,
+        })

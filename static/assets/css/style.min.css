@@ -2880,13 +2880,12 @@ p:last-child {
   margin-bottom: 0;
 }
 .recent-blog-item-list .image {
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100%;
   overflow: hidden;
 }
 .recent-blog-item-list .image img {
   width: 100%;
-  border-radius: 50%;
 }
 .recent-blog-item-list .content {
   width: calc(100% - 70px);
