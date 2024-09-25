@@ -116,9 +116,9 @@
                                             <h4 class="title"><a href="{%url 'project-detail' project.pk%}">{{project.title}}</a></h4>
 
                                             <ul class="catagory-nav-item">
-                                                <li><a href="">Chairty</a></li>
-                                                <li><a href="">Fund Rising</a></li>
-                                                <li><a href="">Non Profit</a></li>
+                                                {% for tag in project.hashtag.all %}
+                                                <li><a href="">{{ tag.title | title }}</a></li>
+                                            {% endfor %}
                                             </ul>
                                         </div>
                                     </div>

@@ -92,11 +92,11 @@
                                 <ul class="recent-blog-item-list">
                                     {%for posts in related_posts%}
                                     <li>
-                                        <a href="blog-details-sidebar-left.html" class="image">
+                                        <a href="{%url 'blog-detail' posts.pk %}" class="image">
                                             <img src="{{posts.image.url}}" alt="">
                                         </a>
                                         <div class="content">
-                                            <h4 class="title"><a href="blog-details-sidebar-left.html">{{posts.title | title}}</a></h4>
+                                            <h4 class="title"><a href="{%url 'blog-detail' posts.pk %}">{{posts.title | title}}</a></h4>
                                             <div class="post-meta">
                                                 <a href="#" class="date icon-space-right"><i class="icofont-calendar"></i> {{posts.publish_date}}</a>
                                             </div>
@@ -129,7 +129,7 @@
                                  {%for post in posts%}
                                 <div class="blog-list-single-item">
                                     <div class="inner-shape inner-shape-top-right"></div>
-                                    <a href="blog-details-sidebar-left.html" class="image">
+                                    <a href="{%url 'blog-detail' post.pk%}" class="image">
                                         <img src="{{post.image.url}}" alt="">
                                     </a>
                                     <div class="content">
@@ -137,7 +137,7 @@
                                             <a href="{% url 'category_list' category_slug=post.category.slug %}" class="catagory">{{post.category}}</a>
                                             <a href="#" class="date">{{post.publish_date}}</a>
                                         </div>
-                                        <h4 class="title"><a href="#">{{post.title}}</a></h4>
+                                        <h4 class="title"><a href="{%url 'blog-detail' post.pk%}">{{post.title}}</a></h4>
 
                                         <div class="post-meta-2">
                                             <a href="#" class="icon-space-right"><i class="icofont-ui-user"></i>{{post.author | title}}</a>
@@ -161,17 +161,28 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <ul class="pagination-nav-list">
-                                                <li class="prev"><a href="#"><i class="icofont-double-left"></i></a></li>
-                                                <li><a href="#">1</a></li>
-                                                <li class="active"><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li class="next"><a href="#"><i class="icofont-double-right"></i></a></li>
+                                                {% if posts.has_previous %}
+                                                    <li class="prev"><a href="?page={{ posts.previous_page_number }}"><i class="icofont-double-left"></i></a></li>
+                                                {% endif %}
+                                                
+                                                {% for num in posts.paginator.page_range %}
+                                                    {% if posts.number == num %}
+                                                        <li class="active"><a href="#">{{ num }}</a></li>
+                                                    {% else %}
+                                                        <li><a href="?page={{ num }}">{{ num }}</a></li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                
+                                                {% if posts.has_next %}
+                                                    <li class="next"><a href="?page={{ posts.next_page_number }}"><i class="icofont-double-right"></i></a></li>
+                                                {% endif %}
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <!--  Start Pagination  -->
+                                <!--  End Pagination  -->
                             </div>
+                            
                         </div>
                     </div>
                 </div>

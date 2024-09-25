@@ -7,13 +7,14 @@ import uuid
 from django.shortcuts import redirect, get_object_or_404
 from .models import Post, Like
 from .utils import check_click_likes
-
+from django.core.paginator import Paginator
 
 
 class HomePageView(ListView):
     model = Service
     template_name = 'index.html'
     context_object_name = 'object_list'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         home = HomeDefault.objects.all()
@@ -72,10 +73,13 @@ from .models import Post,Category,BlogTag,Comment,Like
 def rightblogview(request):
     user_id = assign_user_id(request)
     categories = Category.objects.all().order_by('?')[:4]
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-publish_date')  # Order by the desired field
     related_posts = Post.objects.all()
+    paginator = Paginator(posts,8)
+    page_number = request.GET.get('page')
+    page_obj =  paginator.get_page(page_number)
     return render(request,'blog-list-sidebar-right.html',context=
-    {'posts': posts, 
+    {'posts': page_obj, 
      'user_id': user_id,
      "categories":categories,
      "related_posts":related_posts
@@ -114,10 +118,13 @@ def category_list(request,category_slug):
     posts = Post.objects.filter(category=slug)
     categories = Category.objects.exclude(slug__in=[category_slug]).order_by('?')[:4]
     related_posts = Post.objects.filter(category=slug)
+    paginator = Paginator(posts,10)
+    page_number = request.GET.get('page')
+    page_obj =  paginator.get_page(page_number)
 
     return render(request,'blog-list-sidebar-right.html',context={
         "slug":slug,
-        "posts":posts,
+        "posts":page_obj,
         "categories":categories,
         "related_posts":related_posts,
         })
@@ -130,4 +137,56 @@ def search(request):
     categories = Category.objects.all().order_by('?')[:4]
     query = request.GET.get('query')
     posts = Post.objects.filter(title__icontains=query)
-    return render(request,"blog-list-sidebar-right.html",context={"related_posts":related_posts,"posts":posts,"categories":categories})
+    paginator = Paginator(posts,10)
+    page_number = request.GET.get('page')
+    page_obj =  paginator.get_page(page_number)
+    return render(request,"blog-list-sidebar-right.html",context={"related_posts":related_posts,"posts":page_obj,"categories":categories})
+
+
+
+
+
+
+# BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE
+# BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE
+# BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE
+# BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE
+# BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE # BLOG DETAILS PAGE
+from .utils import check_read_articles
+def blogdetailsview(request,pk):
+    post = Post.objects.get(id=pk)
+    categories = Category.objects.all().order_by('?')[:4]
+    social_media = SocialMarkets.objects.all()
+    request.session.modified = True
+    if post.id in check_read_articles(request):
+        pass
+    else:
+        check_read_articles(request).append(post.id)
+        post.views +=1
+        post.save()
+
+
+    if request.method == "POST":
+        name = request.POST.get('name')
+        jobtitle = request.POST.get('job')
+        comment = request.POST.get('comment')
+        image = 'https://amirjonkarimov2007.github.io/portfolio/assets/images/users/user-1.jpg'
+        if all([name,jobtitle,comment]):
+            Comment.objects.create(
+                author = name,
+                jobtitle = jobtitle,
+                comment = comment,
+                post = post,
+                image = image
+            )
+    related_posts = Post.objects.filter(category=post.category).exclude(id__in=[0,post.id]).order_by('?')[:5]
+
+    data = {
+        "post":post,
+        "categories":categories,
+        "social_media":social_media,
+        "related_posts":related_posts
+        
+    }
+
+    return render(request,'blog-details-sidebar-right.html',data)

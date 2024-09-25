@@ -33,7 +33,7 @@ class SocialMarkets(models.Model):
     email_address = models.CharField(max_length=400,verbose_name="email manzil")
     social = models.ForeignKey(HomeDefault, on_delete=models.CASCADE, related_name='socials')
     def __str__(self) -> str:
-        return self.phone_number
+        return self.linkedin
 
 class Statics(models.Model):
     happy_clients = models.BigIntegerField(verbose_name="Hursand Mijozlar")

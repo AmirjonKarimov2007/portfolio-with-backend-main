@@ -51,14 +51,7 @@
                             </li>
                             <li class="has-dropdown">
                                 <a href="{%url 'blog'%}">Blog</a>
-                                <ul class="submenu">
-                                    <!-- <li><a href="blog-list.html">Blog List Full Width</a></li> -->
-                                    <!-- <li><a href="blog-list-sidebar-left.html">Blog List Left Sidebar</a></li> -->
-                                    <li><a href="{%url 'blog'%}">Blog List Right Sidebar</a></li>
-                                    <!-- <li><a href="blog-details.html">Blog Details Full Width</a></li> -->
-                                    <!-- <li><a href="blog-details-sidebar-left.html">Blog Details Left Sidebar</a></li> -->
-                                    <li><a href="blog-details-sidebar-right.html">Blog Details Right Sidebar</a></li>
-                                </ul>
+                                
                             </li>
                             
                             <li><a href="{% url 'projects' %}">Project</a></li>
@@ -67,7 +60,6 @@
                                 <ul class="submenu">
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="{% url 'projects' %}">Project</a></li>
-                                    <li><a href="project-details.html">Project Details</a></li>
                                     <li><a href="faq.html">FAQ</a></li>
                                     <li><a href="404-page.html">404 Page</a></li>
                                 </ul>
@@ -124,15 +116,8 @@
                             
                         </li>
                         <li>
-                            <a href="#"><span>Blog</span></a>
-                            <ul class="mobile-sub-menu">
-                                <!-- <li><a href="blog-list.html">Blog List Full Width</a></li> -->
-                                <!-- <li><a href="blog-list-sidebar-left.html">Blogs List Left Sidebar</a></li> -->
-                                <li><a href="blog-list-sidebar-right.html">Blog List Right Sidebar</a></li>
-                                <!-- <li><a href="blog-details.html">Blog Details Full Width</a></li> -->
-                                <!-- <li><a href="blog-details-sidebar-left.html">Blog Details Left Sidebar</a></li> -->
-                                <li><a href="blog-details-sidebar-right.html">Blog Details Right Sidebar</a></li>
-                            </ul>
+                            <a href="{%url 'blog'%}"><span>Blog</span></a>
+                            
                         </li>
                         <li>
                             <a href="#"><span>Pages</span></a>
@@ -178,13 +163,13 @@
                             <span class="section-tag">Get Latest Updates</span>
                             <h2 class="section-title">Subscribe For Newsletter</h2>
                         </div>
-                        <!-- End Section Content -->
+                    <!-- End Section Content -->
                     </div>
                 </div>
                 <div class="footer-top-wrapper text-center">
                     <div class="row">
                         <div class="col-12">
-                            <form action="#" class="footer-newsletter">
+                            <form action=" " method="post" class="footer-newsletter">{%csrf_token%}
                                 <input type="email" placeholder="amirjonkarimoff@gmail.com">
                                 <button class="submit-btn" type="submit">Subscribe Now</button>
                             </form>

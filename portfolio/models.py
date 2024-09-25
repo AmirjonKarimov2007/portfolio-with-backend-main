@@ -95,7 +95,7 @@ class Project(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name="Xizmat haqida")
     hashtag = models.ManyToManyField(Tag)
     photo = models.ManyToManyField(ProjectPhoto)
-    filter = models.ForeignKey(
+    filter_name = models.ForeignKey(
         ProjectFilter,
         on_delete=models.CASCADE
     )
@@ -137,22 +137,34 @@ class BlogTag(models.Model):
         return str(self.name)
 from django.db import models
 from django.contrib.auth.models import User
-
+# POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST
+# POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST
+# POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST
+# POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST
+class PostTag(models.Model):
+    title = models.CharField(max_length=200,verbose_name="tag nomi")
+    def __str__(self) -> str:
+        return self.title
+    
 class Post(models.Model):
     title = models.CharField(verbose_name="Post title", max_length=550)
+    description = models.TextField(verbose_name="Post Haqida")
     author = models.CharField(verbose_name="Post author", default="Admin", max_length=100)
     image = models.ImageField(upload_to='blog_images/')
+    tag = models.ManyToManyField(PostTag)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='posts')
     views = models.PositiveIntegerField(default=0)
     publish_date = models.DateTimeField(verbose_name="Published time", auto_now_add=True)
     published = models.BooleanField(default=True)
     on_top = models.BooleanField(default=False)
-
-
+    
+    def split_description(self, chunk_size=330):
+            return [self.description[i:i+chunk_size] for i in range(0, len(self.description), chunk_size)]
     def __str__(self):
         return self.title
+    class Meta:
+        ordering = ['-publish_date']
 
-   
 class Like(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
     user_id = models.CharField(verbose_name="post likes",max_length=500)
@@ -162,9 +174,12 @@ class Like(models.Model):
 
 class Comment(models.Model):
     author = models.CharField(verbose_name="Comment author", max_length=100, blank=False)
+    jobtitle = models.CharField(verbose_name="Job Title", max_length=200, blank=False)
     comment = models.TextField(verbose_name="Comment")
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     image = models.ImageField(upload_to='comment_images/', blank=True, null=True)  # Rasm saqlash uchun
+    publish_date = models.DateTimeField(verbose_name="Published time", auto_now_add=True)
+
 
     def __str__(self):
         return str(self.author)

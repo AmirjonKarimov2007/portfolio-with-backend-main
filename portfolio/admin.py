@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Service, BasicService, StandardService, PremiumService, ServiceText, FeaturesText, Planstext,Project,ProjectFilter,ProjectText,ProjectPhoto,Tag,Like
+from .models import Service, BasicService, StandardService, PremiumService, ServiceText, FeaturesText, Planstext,Project,ProjectFilter,ProjectText,ProjectPhoto,Tag,Like,PostTag
 
 # Register your models here.
 # --------------------- Services admin panel form ----------------------------------->>>
@@ -61,6 +61,7 @@ admin.site.register(ProjectPhoto)
 admin.site.register(ProjectFilter)
 admin.site.register(ProjectText)
 admin.site.register(Project)
+admin.site.register(PostTag)
 
 
 
