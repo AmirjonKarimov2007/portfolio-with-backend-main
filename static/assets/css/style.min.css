@@ -1075,7 +1075,7 @@ p:last-child {
 }
 @media (min-width: 992px) {
   .hero-content .title-large {
-    font-size: 80px;
+    font-size: 75px;
   }
 }
 @media (min-width: 1200px) {
@@ -1085,12 +1085,12 @@ p:last-child {
 }
 @media (min-width: 1400px) {
   .hero-content .title-large {
-    font-size: 110px;
+    font-size: 95px;
   }
 }
 @media (min-width: 1800px) {
   .hero-content .title-large {
-    font-size: 140px;
+    font-size: 100px;
   }
 }
 .hero-content .shape-mark {

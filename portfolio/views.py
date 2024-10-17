@@ -22,7 +22,7 @@ class HomePageView(ListView):
         # Fetching data from the defaults app
         context['home_defaults'] = home
         context['skills'] = Skill.objects.all()
-        context['social_markets'] = SocialMarkets.objects.all()
+        context['social'] = SocialMarkets.objects.get(id=1)
         context['statistics'] = Statics.objects.all()
         context['companies'] = Company.objects.all()
         context['projects'] = project
@@ -32,6 +32,18 @@ class HomePageView(ListView):
 class ServicePageView(ListView):
     template_name = 'service-list.html'
     model = Service
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        home = HomeDefault.objects.all()
+        project = Project.objects.all() 
+        # Fetching data from the defaults app
+        context['home_defaults'] = home
+        context['skills'] = Skill.objects.all()
+        context['social'] = SocialMarkets.objects.get(id=1)
+        context['statistics'] = Statics.objects.all()
+        context['companies'] = Company.objects.all()
+        context['projects'] = project
+        return context
 
 
 class ServiceDetailsView(DetailView):
@@ -46,6 +58,8 @@ class ServiceDetailsView(DetailView):
         context['basic_service'] = service.basic_service
         context['standard_service'] = service.standard_service
         context['premium_service'] = service.premium_service
+        context['social'] = SocialMarkets.objects.get(id=1)
+        context['home_defaults'] =  HomeDefault.objects.all()
         context['object_list'] = Service.objects.all()[:4]  # Limit to first four services
         
         # Preprocess plans_text to replace commas followed by space with <br> tags
@@ -56,11 +70,19 @@ class ServiceDetailsView(DetailView):
 class ProjectPageView(ListView):
     template_name = 'project-list.html'
     model = Project
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['social'] = SocialMarkets.objects.get(id=1)
+        context['home_defaults'] =  HomeDefault.objects.all()
 
 class ProjectDetailsView(DetailView):
     template_name = 'project-details.html'
     model = Project
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['social'] = SocialMarkets.objects.get(id=1)
+        context['home_defaults'] =  HomeDefault.objects.all()
+        return context
 
 from .models import Post,Category,BlogTag,Comment,Like
 
@@ -78,13 +100,16 @@ def rightblogview(request):
     paginator = Paginator(posts,8)
     page_number = request.GET.get('page')
     page_obj =  paginator.get_page(page_number)
+    
     return render(request,'blog-list-sidebar-right.html',context=
     {'posts': page_obj, 
      'user_id': user_id,
      "categories":categories,
-     "related_posts":related_posts
+     "related_posts":related_posts,
+     ""
      }
      )
+     
 
 
 def assign_user_id(request):

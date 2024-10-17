@@ -26,12 +26,14 @@ class SocialMarkets(models.Model):
     instagram = models.CharField(max_length=400,verbose_name="Instagram",blank=True)
     telegram = models.CharField(max_length=400,verbose_name="Telegram",blank=True)
     facebook = models.CharField(max_length=400,verbose_name="Facebook",blank=True)
+    github = models.CharField(max_length=400,verbose_name="Github")
     youtube = models.CharField(max_length=400,verbose_name="Youtube",blank=True)
     fiverr = models.CharField(max_length=400,verbose_name="Fiverr",blank=True)
     upwork = models.CharField(max_length=400,verbose_name="Upwork",blank=True)
     phone_number = models.CharField(max_length=400,verbose_name="Telefon Raqam",blank=True)
     email_address = models.CharField(max_length=400,verbose_name="email manzil")
     social = models.ForeignKey(HomeDefault, on_delete=models.CASCADE, related_name='socials')
+
     def __str__(self) -> str:
         return self.linkedin
 
