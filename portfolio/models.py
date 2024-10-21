@@ -1,4 +1,9 @@
+from tabnanny import verbose
+
 from django.db import models
+from django.db.models import CharField
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 class FeaturesText(models.Model):
     title = models.CharField(max_length=100)
@@ -143,7 +148,7 @@ from django.contrib.auth.models import User
 # POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST POST
 class PostTag(models.Model):
     title = models.CharField(max_length=200,verbose_name="tag nomi")
-    def __str__(self) -> str:
+    def __str__(self) -> CharField:
         return self.title
     
 class Post(models.Model):
@@ -177,10 +182,71 @@ class Comment(models.Model):
     jobtitle = models.CharField(verbose_name="Job Title", max_length=200, blank=False)
     comment = models.TextField(verbose_name="Comment")
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    image = models.ImageField(upload_to='comment_images/', blank=True, null=True)  # Rasm saqlash uchun
+    image = models.ImageField(upload_to='comment_images/', blank=True, null=True)
     publish_date = models.DateTimeField(verbose_name="Published time", auto_now_add=True)
 
 
     def __str__(self):
         return str(self.author)
+
+class Profile(models.Model):
+    fullname = models.CharField(max_length=200,verbose_name="Ism Familiya")
+    description = models.CharField(max_length=500,verbose_name='Siz haqingizda')
+    job = models.CharField(max_length=200,verbose_name="Kasbingiz")
+    age = models.IntegerField(verbose_name="Yosh",blank=True,null=True)
+    logo = models.ImageField(upload_to='profile_logos/',blank=True,null=True)
+    def __str__(self):
+        return  self.fullname
+
+# Education Model
+
+class Education(models.Model):
+    program_type = models.CharField(max_length=200,verbose_name="Yo'nalish")
+    institution = models.CharField(max_length=255)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    description = models.TextField()
+    profile = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name="educations")
+    def clean(self):
+        super().clean()
+        today = timezone.now().date()
+
+        if self.start_date > today:
+            raise ValidationError('Start date cannot be in the past.')
+
+        if self.end_date <= self.start_date:
+            raise ValidationError('End date must be after the start date.')
+
+    def __str__(self):
+        return str(self.institution)
+
+class Experience(models.Model):
+    job = models.CharField(max_length=200, verbose_name="Kasb")
+    company = models.CharField(max_length=255)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    description = models.TextField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="experiences")
+
+    def clean(self):
+        super().clean()
+        today = timezone.now().date()
+
+        if self.start_date > today:
+            raise ValidationError('Start date cannot be in the past.')
+
+        if self.end_date <= self.start_date:
+            raise ValidationError('End date must be after the start date.')
+
+    def __str__(self):
+        return str(self.job)
+
+
+
+
+
+
+
+
+
 

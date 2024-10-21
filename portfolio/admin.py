@@ -1,14 +1,18 @@
 from django.contrib import admin
-from .models import Service, BasicService, StandardService, PremiumService, ServiceText, FeaturesText, Planstext,Project,ProjectFilter,ProjectText,ProjectPhoto,Tag,Like,PostTag
-
+from .models import (Service, BasicService, StandardService, PremiumService,
+                     ServiceText, FeaturesText, Planstext,Project,ProjectFilter,ProjectText,ProjectPhoto,Tag,Like,PostTag,Profile,Education,Experience)
 # Register your models here.
 # --------------------- Services admin panel form ----------------------------------->>>
 admin.site.register(ServiceText)
 admin.site.register(FeaturesText)
 admin.site.register(Planstext)
 admin.site.register(Tag)
-admin.site.register(Like)
+admin.site.register(Education)
+admin.site.register(Experience)
 
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('fullname', 'age')
 
 # -----------------------Packages for admin panel form -------------------------------------->
 class BasicServiceInline(admin.StackedInline):

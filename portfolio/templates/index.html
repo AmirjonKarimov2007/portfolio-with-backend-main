@@ -2,34 +2,11 @@
 
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="zxx">
 
-<head>
-
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="robots" content="noindex, follow" />
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/logo/logo-removebg-preview (1) (3).png' %}" />
-
-
-
-</head>
 <body>
     {% block content %}
     <main class="main-wrapper">
-        <!-- .....:::::: Start Header Section :::::.... -->
 
-
-
-        <!-- .....:::::: End Header Section :::::.... -->
-
-        <!-- .....:::::: Start Mobile Header Section :::::.... -->
-        
-        <!-- ...:::: End Offcanvas Mobile Menu Section:::... -->
 
         <!-- Offcanvas Overlay -->
         <div class="offcanvas-overlay"></div>
@@ -42,10 +19,10 @@
                         <div class="col-xxl-7">
                             {%for defaults in home_defaults%}
                             <div class="hero-content">
-                                <h3 class="title-big">Hello! I’m</h3>
-                                <h2 class="title-large">{{ defaults.name|slice:":7" }}<span class="shape-mark">{{ defaults.name|slice:"7:" }}</span></h2>
-                                <p>Fullstack Developer specializing in Python, Django & Aiogram.</p>
 
+                                <h3 class="title-big">Hello! I’m</h3>
+                                <h2 class="title-large">{{ profile.fullname|slice:":7" }}<span class="shape-mark">{{ profile.fullname|slice:"7:" }}</span></h2>
+                                <p>{{profile.job}}</p>
                                 <a href="{% static 'Amirjon_Karimov_CV.pdf' %}" download class="btn btn-xl btn-outline-one icon-space-left">
                                     Get Resume <i class="icofont-download"></i>
                                 </a>

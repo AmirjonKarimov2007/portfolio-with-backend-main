@@ -5,12 +5,7 @@
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-       
-            {%for i in home_defaults%}
-                <title>{{i.title}}</title>
-            {%endfor%}
-        
-
+        <title>Amirjon Karimov | Portfolio</title>
         <meta name="robots" content="noindex, follow" />
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -46,6 +41,7 @@
                         <!-- Start Header Menu -->
                         <ul class="header-nav">
                             <li><a href="{%url 'home'%}">Home</a></li>
+                            <li><a href="{%url 'about'%}">About Us</a></li>
                             <li class="has-dropdown">
                                 <a href="{%url 'services'%}">Service</a>
                             </li>
@@ -55,15 +51,14 @@
                             </li>
                             
                             <li><a href="{% url 'projects' %}">Project</a></li>
-                            <li class="has-dropdown">
+                            <!-- <li class="has-dropdown">
                                 <a href="#">Pages</a>
                                 <ul class="submenu">
-                                    <li><a href="about.html">About Us</a></li>
                                     <li><a href="{% url 'projects' %}">Project</a></li>
                                     <li><a href="faq.html">FAQ</a></li>
                                     <li><a href="404-page.html">404 Page</a></li>
                                 </ul>
-                            </li>
+                            </li> -->
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
                         <!-- End Header Menu -->

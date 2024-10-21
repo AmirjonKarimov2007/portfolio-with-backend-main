@@ -1,11 +1,10 @@
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,ListView,DetailView
-from .models import Service,Project
 # Create your views here.
 from defaults.models import HomeDefault, Skill, SocialMarkets, Statics, Company
 import uuid
 from django.shortcuts import redirect, get_object_or_404
-from .models import Post, Like
+from .models import Post, Like,Service,Project,Profile,Education
 from .utils import check_click_likes
 from django.core.paginator import Paginator
 
@@ -17,6 +16,7 @@ class HomePageView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        profile = Profile.objects.get(id=1)
         home = HomeDefault.objects.all()
         project = Project.objects.all() 
         # Fetching data from the defaults app
@@ -27,8 +27,27 @@ class HomePageView(ListView):
         context['companies'] = Company.objects.all()
         context['projects'] = project
         context['posts'] = Post.objects.all()[:4]
+        context['profile'] = profile
      
         return context
+    
+# About Page View
+def aboutpageview(request):
+    home = HomeDefault.objects.all()
+    defaults = HomeDefault.objects.get(id=1)
+    statistics = Statics.objects.all()
+    social = SocialMarkets.objects.get(id=1)
+    profile = Profile.objects.get(id=1)
+    data = {
+        'statistics':statistics,
+        'home_defaults':home,
+        'defaults':defaults,
+        'social':social,
+        'profile':profile
+    }
+    return render(request,'about.html',data)
+
+
 # Services List
 class ServicePageView(ListView):
     template_name = 'service-list.html'

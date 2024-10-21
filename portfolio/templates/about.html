@@ -1,3 +1,5 @@
+{%extends 'base.html'%}
+{%load static%}
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -5,185 +7,19 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Lendex - Personal Portfolio Bootstrap Template</title>
+    <title>Amirjon Karimov | About</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico" />
-
-    <!-- CSS
-    ============================================ -->
-
-    <!-- Vendor CSS (Contain Bootstrap, Icon Fonts) -->
-    <!-- <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/vendor/icofont.min.css" /> -->
-
-    <!-- Plugin CSS (Global Plugins Files) -->
-    <!-- <link rel="stylesheet" href="assets/css/plugins/animate.css">
-    <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/venobox.min.css" /> -->
-
-    <!-- Style CSS -->
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
-
-    <!-- Minify Version -->
-    <link rel="stylesheet" href="assets/css/vendor/vendor.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
-    <link rel="stylesheet" href="assets/css/style.min.css">
 
 </head>
 
 <body>
-
+{%block content%}
     <main class="main-wrapper">
         <!-- .....:::::: Start Header Section :::::.... -->
-        <header class="header-section sticky-header d-none d-lg-block">
-            <div class="header-wrapper">
-                <div class="container">
-                    <div class="row justify-content-between align-items-center">
-                        <div class="col">
-                            <!-- Start Header Logo -->
-                            <a href="index.html" class="header-logo">
-                                <img src="assets/images/logo/logo.png" alt="">
-                            </a>
-                            <!-- End Header Logo -->
-                        </div>
-                        <div class="col-auto">
-                            <!-- Start Header Menu -->
-                            <ul class="header-nav">
-                                <li><a href="index.html">Home</a></li>
-                                <li class="has-dropdown">
-                                    <a href="service-list.html">Service</a>
-                                    <ul class="submenu">
-                                        <li><a href="service-list.html">Services</a></li>
-                                        <li><a href="service-details.html">Service Details</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-dropdown">
-                                    <a href="blog-list.html">Blog</a>
-                                    <ul class="submenu">
-                                        <li><a href="blog-list.html">Blog List Full Width</a></li>
-                                        <li><a href="blog-list-sidebar-left.html">Blog List Left Sidebar</a></li>
-                                        <li><a href="blog-list-sidebar-right.html">Blog List Right Sidebar</a></li>
-                                        <li><a href="blog-details.html">Blog Details Full Width</a></li>
-                                        <li><a href="blog-details-sidebar-left.html">Blog Details Left Sidebar</a></li>
-                                        <li><a href="blog-details-sidebar-right.html">Blog Details Right Sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-dropdown">
-                                    <a href="#">Pages</a>
-                                    <ul class="submenu">
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="project-list.html">Project</a></li>
-                                        <li><a href="project-details.html">Project Details</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
-                                        <li><a href="404-page.html">404 Page</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                            <!-- End Header Menu -->
-                        </div>
-                        <div class="col">
-                            <div class="header-btn-link text-end">
-                                <a href="#" class="btn btn-sm btn-outline-one icon-space-left">Hire Me <i class="icofont-double-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- .....:::::: End Header Section :::::.... -->
-
-        <!-- .....:::::: Start Mobile Header Section :::::.... -->
-        <div class="mobile-header d-block d-lg-none">
-            <div class="container">
-                <div class="row align-items-center justify-content-between">
-                    <div class="col">
-                        <div class="mobile-logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="mobile-action-link text-end">
-                            <a href="#mobile-menu-offcanvas" class="offcanvas-toggle offside-menu"><i class="icofont-navigation-menu"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- .....:::::: Start MobileHeader Section :::::.... -->
-
-        <!--  Start Offcanvas Mobile Menu Section -->
-        <div id="mobile-menu-offcanvas" class="offcanvas offcanvas-rightside offcanvas-mobile-menu-section">
-            <!-- Start Offcanvas Header -->
-            <div class="offcanvas-header text-right">
-                <button class="offcanvas-close"><i class="icofont-close-line"></i></button>
-            </div>
-            <!-- End Offcanvas Header -->
-            <!-- Start Offcanvas Mobile Menu Wrapper -->
-            <div class="offcanvas-mobile-menu-wrapper">
-                <!-- Start Mobile Menu  -->
-                <div class="mobile-menu-bottom">
-                    <!-- Start Mobile Menu Nav -->
-                    <div class="offcanvas-menu">
-                        <ul>
-                            <li>
-                                <a href="index.html"><span>Home</span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>Services</span></a>
-                                <ul class="mobile-sub-menu">
-                                    <li><a href="service-list.html">Service List</a></li>
-                                    <li><a href="service-details.html">Service Details</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><span>Blog</span></a>
-                                <ul class="mobile-sub-menu">
-                                    <li><a href="blog-list.html">Blog List Full Width</a></li>
-                                    <li><a href="blog-list-sidebar-left.html">Blog List Left Sidebar</a></li>
-                                    <li><a href="blog-list-sidebar-right.html">Blog List Right Sidebar</a></li>
-                                    <li><a href="blog-details.html">Blog Details Full Width</a></li>
-                                    <li><a href="blog-details-sidebar-left.html">Blog Details Left Sidebar</a></li>
-                                    <li><a href="blog-details-sidebar-right.html">Blog Details Right Sidebar</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#"><span>Pages</span></a>
-                                <ul class="mobile-sub-menu">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="project-list.html">Project</a></li>
-                                    <li><a href="project-details.html">Project Details</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="404-page.html">404 Page</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="contact.html"><span>Contact</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- End Mobile Menu Nav -->
-                </div>
-                <!-- End Mobile Menu -->
-
-                <!-- Start Mobile contact Info -->
-                <div class="mobile-contact-info text-center">
-                    <ul class="social-link">
-                        <li><a target="_blank" href="https://example.com"><i class="icofont-facebook"></i></a>
-                        </li>
-                        <li><a target="_blank" href="https://example.com"><i class="icofont-twitter"></i></a>
-                        </li>
-                        <li><a target="_blank" href="https://example.com"><i class="icofont-skype"></i></a></li>
-                    </ul>
-                </div>
-                <!-- End Mobile contact Info -->
-
-            </div>
-            <!-- End Offcanvas Mobile Menu Wrapper -->
-        </div>
+        
         <!-- ...:::: End Offcanvas Mobile Menu Section:::... -->
 
         <!-- Offcanvas Overlay -->
@@ -200,7 +36,7 @@
                             <div class="breadcrumb-content">
                                 <h2 class="title">About Us</h2>
                                 <ul class="breadcrumb-link">
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="{%url 'home'%}">Home</a></li>
                                     <li class="active" aria-current="page">About</li>
                                 </ul>
                             </div>
@@ -219,22 +55,23 @@
                         <div class="row align-items-center">
                             <div class="col-xl-5 col-lg-6 col-md-6 col-sm-8 col-10 offset-1 offset-sm-2 offset-md-3 offset-lg-0">
                                 <div class="video-card">
-                                    <a class="wave-btn" href="https://youtu.be/MKjhBO2xQzg" data-autoplay="true" data-vbtype="video">
+                                    <a class="wave-btn" href="{{defaults.video_link}}" data-autoplay="true" data-vbtype="video">
                                         <div class="ripple"><i class="icofont-ui-play"></i></div>
                                     </a>
 
-                                    <a href="#" class="btn btn-xl btn-outline-one icon-space-left">Get Resume <i class="icofont-download"></i></a>
-                                </div>
+                                    <a href="{% static 'Amirjon_Karimov_CV.pdf' %}" download class="btn btn-xl btn-outline-one icon-space-left">
+                                        Get Resume <i class="icofont-download"></i>
+                                    </a>                                </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-8 offset-md-2 offset-lg-0 offset-xl-1">
                                 <div class="video-info-content">
-                                    <h2 class="title">I’m Mirta Akins</h2>
+                                    <h2 class="title">I’m {{profile.fullname}}</h2>
 
                                     <h3 class="sub-title">
-                                        UI/UX designer specializing in shopify & webflow.
+                                       {{profile.job}}
                                     </h3>
 
-                                    <p>Lorem Ipsum is simply dummy text of the printing and pesetting industry has been the industry's standard dummy text ever since the 1500s, when an unkn own printer took galley of type and scrambled.</p>
+                                    <p>{{profile.description}}</p>
                                 </div>
                             </div>
                         </div>
@@ -266,100 +103,42 @@
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="education-tab" role="tabpanel">
                                         <ul class="resume-list">
+                                            {%for edu in profile.educations.all%}
                                             <!-- Start Resume Tab List Single Item -->
                                             <li class="resume-tab-list-single-item">
                                                 <div class="content">
                                                     <div class="left">
-                                                        <span class="year">2009 - 2010</span>
+                                                        <span class="year">{{ edu.start_date|date:"Y" }} - {{ edu.end_date|date:"Y" }}</span>
                                                     </div>
                                                     <div class="right">
-                                                        <h3 class="title">Bachelor of Business Administration </h3>
-                                                        <span class="institute-name">University of California, Berkeley</span>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indus dard dummy text ever since the 1500 when an uniknown prnter took galley of type and scrambled
-                                                            make specimen book has not only five centuries the into electronic.</p>
+                                                        <h3 class="title">{{edu.program_type}} </h3>
+                                                        <span class="institute-name">{{edu.institution}}</span>
+                                                        <p>{{edu.description}}</p>
                                                     </div>
                                                 </div>
                                             </li>
                                             <!-- End Resume Tab List Single Item -->
-                                            <!-- Start Resume Tab List Single Item -->
-                                            <li class="resume-tab-list-single-item">
-                                                <div class="content">
-                                                    <div class="left">
-                                                        <span class="year">2012 - 2014</span>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h3 class="title">Masters of Business Administration </h3>
-                                                        <span class="institute-name">University of California, Berkeley</span>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indus dard dummy text ever since the 1500 when an uniknown prnter took galley of type and scrambled
-                                                            make specimen book has not only five centuries the into electronic.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- End Resume Tab List Single Item -->
-                                            <!-- Start Resume Tab List Single Item -->
-                                            <li class="resume-tab-list-single-item">
-                                                <div class="content">
-                                                    <div class="left">
-                                                        <span class="year">2015 - 2018</span>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h3 class="title">Bachelor of Graphic Arts</h3>
-                                                        <span class="institute-name">University of California, Berkeley</span>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indus dard dummy text ever since the 1500 when an uniknown prnter took galley of type and scrambled
-                                                            make specimen book has not only five centuries the into electronic.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- End Resume Tab List Single Item -->
+                                            {%endfor%}
                                         </ul>
                                     </div>
                                     <div class="tab-pane fade" id="experience-tab" role="tabpanel">
                                         <ul class="resume-list">
+                                            {%for experience in profile.experiences.all%}
                                             <!-- Start Resume Tab List Single Item -->
                                             <li class="resume-tab-list-single-item">
                                                 <div class="content">
                                                     <div class="left">
-                                                        <span class="year">2016 - 2018</span>
+                                                        <span class="year">{{ experience.start_date|date:"Y" }} - {{ experience.end_date|date:"Y" }}</span>
                                                     </div>
                                                     <div class="right">
-                                                        <h3 class="title">Web Designer</h3>
-                                                        <span class="institute-name">Graphic Dev</span>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indus dard dummy text ever since the 1500 when an uniknown prnter took galley of type and scrambled
-                                                            make specimen book has not only five centuries the into electronic.</p>
+                                                        <h3 class="title">{{experience.job}}</h3>
+                                                        <span class="institute-name">{{experience.company}}</span>
+                                                        <p>{{experience.description}}.</p>
                                                     </div>
                                                 </div>
                                             </li>
                                             <!-- End Resume Tab List Single Item -->
-                                            <!-- Start Resume Tab List Single Item -->
-                                            <li class="resume-tab-list-single-item">
-                                                <div class="content">
-                                                    <div class="left">
-                                                        <span class="year">2018 - 2019</span>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h3 class="title">Junior Web Developer</h3>
-                                                        <span class="institute-name">Acme Lab</span>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indus dard dummy text ever since the 1500 when an uniknown prnter took galley of type and scrambled
-                                                            make specimen book has not only five centuries the into electronic.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- End Resume Tab List Single Item -->
-                                            <!-- Start Resume Tab List Single Item -->
-                                            <li class="resume-tab-list-single-item">
-                                                <div class="content">
-                                                    <div class="left">
-                                                        <span class="year">2019 - 2020</span>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h3 class="title">Senior Web Developer</h3>
-                                                        <span class="institute-name">Devtwist</span>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indus dard dummy text ever since the 1500 when an uniknown prnter took galley of type and scrambled
-                                                            make specimen book has not only five centuries the into electronic.</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- End Resume Tab List Single Item -->
+                                            {%endfor%}
                                         </ul>
                                     </div>
                                 </div>
@@ -375,15 +154,16 @@
         <div class="counter-display-section section-gap-tb-165 section-bg-2">
             <div class="counter-display-wrapper">
                 <div class="container">
+                    {%for statics in statistics%}
                     <div class="row justify-content-center justify-content-sm-start">
                         <div class="d-block d-md-flex justify-content-md-start col-12 col-sm-4 col-md-4">
                             <!-- Start Counterup Single Item -->
                             <div class="counterup-single-item">
                                 <div class="icon">
-                                    <img src="assets/images/icon/counterup-icon-1.png" alt="">
+                                    <img src="{%static 'assets/images/icon/counterup-icon-1.png'%}" alt="">
                                 </div>
                                 <div class="content">
-                                    <h2 class="number"><span class="counter">2,58</span>+</h2>
+                                    <h2 class="number"><span class="counter">{{statics.happy_clients}}</span>+</h2>
                                     <span class="text">Happy Clients</span>
                                 </div>
                             </div>
@@ -393,10 +173,10 @@
                             <!-- Start Counterup Single Item -->
                             <div class="counterup-single-item">
                                 <div class="icon">
-                                    <img src="assets/images/icon/counterup-icon-2.png" alt="">
+                                    <img src="{%static 'assets/images/icon/counterup-icon-2.png'%}" alt="">
                                 </div>
                                 <div class="content">
-                                    <h2 class="number"><span class="counter">590</span>K</h2>
+                                    <h2 class="number"><span class="counter">{{statics.project_complate}}</span>+</h2>
                                     <span class="text">Project Complete</span>
                                 </div>
                             </div>
@@ -406,16 +186,17 @@
                             <!-- Start Counterup Single Item -->
                             <div class="counterup-single-item">
                                 <div class="icon">
-                                    <img src="assets/images/icon/counterup-icon-3.png" alt="">
+                                    <img src="{%static 'assets/images/icon/counterup-icon-3.png'%}" alt="">
                                 </div>
                                 <div class="content">
-                                    <h2 class="number"><span class="counter">28</span>+</h2>
+                                    <h2 class="number"><span class="counter">{{statics.experience}}</span>+</h2>
                                     <span class="text">Years of Experience</span>
                                 </div>
                             </div>
                             <!-- End Counterup Single Item -->
                         </div>
                     </div>
+                    {%endfor%}
                 </div>
             </div>
         </div>
@@ -551,32 +332,32 @@
                                             <!-- Start Company Logo Slider Single Item -->
                                             <div class="company-logo-single-item swiper-slide">
                                                 <a href="#" class="image">
-                                                    <img src="assets/images/company-logo/company-logo-1.png" alt="">
-                                                    <img src="assets/images/company-logo/1.png" alt="">
+                                                    <img src="{%static 'assets/images/company-logo/company-logo-1.png'%}" alt="">
+                                                    <img src="{%static 'assets/images/company-logo/1.png'%}" alt="">
                                                 </a>
                                             </div>
                                             <!-- End Company Logo Slider Single Item -->
                                             <!-- Start Company Logo Slider Single Item -->
                                             <div class="company-logo-single-item swiper-slide">
                                                 <a href="#" class="image">
-                                                    <img src="assets/images/company-logo/company-logo-2.png" alt="">
-                                                    <img src="assets/images/company-logo/2.png" alt="">
+                                                    <img src="{%static 'assets/images/company-logo/company-logo-2.png'%}" alt="">
+                                                    <img src="{%static 'assets/images/company-logo/2.png'%}" alt="">
                                                 </a>
                                             </div>
                                             <!-- End Company Logo Slider Single Item -->
                                             <!-- Start Company Logo Slider Single Item -->
                                             <div class="company-logo-single-item swiper-slide">
                                                 <a href="#" class="image">
-                                                    <img src="assets/images/company-logo/company-logo-3.png" alt="">
-                                                    <img src="assets/images/company-logo/3.png" alt="">
+                                                    <img src="{%static 'assets/images/company-logo/company-logo-3.png'%}" alt="">
+                                                    <img src="{%static 'assets/images/company-logo/3.png'%}" alt="">
                                                 </a>
                                             </div>
                                             <!-- End Company Logo Slider Single Item -->
                                             <!-- Start Company Logo Slider Single Item -->
                                             <div class="company-logo-single-item swiper-slide">
                                                 <a href="#" class="image">
-                                                    <img src="assets/images/company-logo/company-logo-4.png" alt="">
-                                                    <img src="assets/images/company-logo/4.png" alt="">
+                                                    <img src="{%static 'assets/images/company-logo/company-logo-4.png'%}" alt="">
+                                                    <img src="{%static 'assets/images/company-logo/4.png'%}" alt="">
                                                 </a>
                                             </div>
                                             <!-- End Company Logo Slider Single Item -->
@@ -598,36 +379,7 @@
         <button class="material-scrolltop" type="button"></button>
     </main>
 
-    <!-- Global Vendor, plugins JS -->
-
-    <!-- JS Files
-    ============================================ -->
-    <!-- Global Vendor, plugins JS -->
-
-    <!-- Vendor JS -->
-    <!-- <script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>
-    <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
-    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script> -->
-
-    <!--Plugins JS-->
-    <!-- <script src="assets/js/plugins/swiper-bundle.min.js"></script>
-    <script src="assets/js/plugins/jquery.appear.min.js"></script>
-    <script src="assets/js/plugins/venobox.min.js"></script>
-    <script src="assets/js/plugins/jquery.waypoints.js"></script>
-    <script src="assets/js/plugins/images-loaded.min.js"></script>
-    <script src="assets/js/plugins/isotope.pkgd.min.js"></script>
-    <script src="assets/js/plugins/counter.js"></script>
-    <script src="assets/js/plugins/ajax-mail.js"></script>
-    <script src="assets/js/plugins/material-scrolltop.js"></script> -->
-
-    <!-- Minify Version -->
-    <script src="assets/js/vendor.min.js"></script>
-    <script src="assets/js/plugins.min.js"></script>
-
-    <!--Main JS (Common Activation Codes)-->
-    <script src="assets/js/main.js"></script>
-
-</body>
+{%endblock content%}
+ </body>
 
 </html>

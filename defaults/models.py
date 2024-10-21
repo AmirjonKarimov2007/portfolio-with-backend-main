@@ -6,7 +6,6 @@ from django.db import models
 
     
 class HomeDefault(models.Model):
-    name = models.CharField(max_length=200,verbose_name="ism familiya")
     title = models.CharField(verbose_name="Sayt sarlavhasi",max_length=300)
     logo = models.ImageField(verbose_name="logo")
     avatar = models.ImageField(verbose_name="Avatar rasmi")
@@ -52,3 +51,4 @@ class Company(models.Model):
     company = models.ForeignKey(HomeDefault,on_delete=models.PROTECT,related_name="companies")
     def __str__(self) -> str:
         return self.name
+
