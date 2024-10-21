@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import (Service, BasicService, StandardService, PremiumService,
-                     ServiceText, FeaturesText, Planstext,Project,ProjectFilter,ProjectText,ProjectPhoto,Tag,Like,PostTag,Profile,Education,Experience)
+                     ServiceText, FeaturesText, Planstext,Project,ProjectFilter,ProjectText,ProjectPhoto,Tag,Like,PostTag,Profile,Education,Experience,
+                     Contact)
 # Register your models here.
 # --------------------- Services admin panel form ----------------------------------->>>
 admin.site.register(ServiceText)
@@ -9,7 +10,7 @@ admin.site.register(Planstext)
 admin.site.register(Tag)
 admin.site.register(Education)
 admin.site.register(Experience)
-
+admin.site.register(Contact)
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('fullname', 'age')

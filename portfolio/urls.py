@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import HomePageView,ServicePageView,ServiceDetailsView,ProjectPageView,ProjectDetailsView,rightblogview,likes_view,category_list,aboutpageview
+from setuptools.extern import names
+
+from .views import HomePageView,ServicePageView,ServiceDetailsView,ProjectPageView,ProjectDetailsView,rightblogview,likes_view,category_list,aboutpageview,contactpageview
 from .views import search,blogdetailsview
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
@@ -13,5 +15,6 @@ urlpatterns = [
     path('<slug:category_slug>/posts/', category_list, name='category_list'),
     path('search/',search,name='search'),
     path('blog-detail/<int:pk>/',blogdetailsview,name='blog-detail'),
+    path('contact',contactpageview,name = 'contact')
     
 ]

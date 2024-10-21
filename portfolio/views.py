@@ -1,9 +1,10 @@
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,ListView,DetailView
 # Create your views here.
 from defaults.models import HomeDefault, Skill, SocialMarkets, Statics, Company
 import uuid
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import get_object_or_404
 from .models import Post, Like,Service,Project,Profile,Education
 from .utils import check_click_likes
 from django.core.paginator import Paginator
@@ -238,3 +239,23 @@ def blogdetailsview(request,pk):
     }
 
     return render(request,'blog-details-sidebar-right.html',data)
+
+from .forms import  ContactForm
+
+def contactpageview(request):
+    if request.method == 'POST':
+       form = ContactForm(request.POST)
+       if form.is_valid():
+            form.save()
+            print(request.POST)
+            return HttpResponse()
+    form = ContactForm()
+    informations = SocialMarkets.objects.get(id=1)
+    data = {
+        'informations': informations,
+        'form':form
+    }
+    return render(request, 'contact.html', data)
+
+
+
