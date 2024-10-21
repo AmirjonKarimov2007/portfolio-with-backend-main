@@ -14,22 +14,6 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico" />
 
-    <!-- CSS
-    ============================================ -->
-
-    <!-- Vendor CSS (Contain Bootstrap, Icon Fonts) -->
-    <!-- <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/vendor/icofont.min.css" /> -->
-
-    <!-- Plugin CSS (Global Plugins Files) -->
-    <!-- <link rel="stylesheet" href="assets/css/plugins/animate.css">
-    <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/venobox.min.css" /> -->
-
-    <!-- Style CSS -->
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
-    
-    <!-- Minify Version -->
 
 </head>
 
@@ -37,17 +21,6 @@
 {%block content%}
     <main class="main-wrapper">
         <!-- .....:::::: Start Header Section :::::.... -->
-
-        <!-- .....:::::: End Header Section :::::.... -->
-
-        <!-- .....:::::: Start Mobile Header Section :::::.... -->
-
-        <!-- .....:::::: Start MobileHeader Section :::::.... -->
-
-        <!--  Start Offcanvas Mobile Menu Section -->
-
-        <!-- ...:::: End Offcanvas Mobile Menu Section:::... -->
-
         <!-- Offcanvas Overlay -->
         <div class="offcanvas-overlay"></div>
 
@@ -81,7 +54,7 @@
                         <div class="projects-gallery-filter-nav">
                             <button class="btn btn-outline-secondary active" data-filter="*">All</button>
                             {%for project in object_list%}
-                            <button class="btn btn-outline-secondary" data-filter=".{{ project.filter.pk }}">{{ project.filter.title }}</button>
+                            <button class="btn btn-outline-secondary" data-filter=".{{ project.filter_name.pk }}">{{ project.filter_name.title }}</button>
                             {%endfor%}
                         </div>
 
@@ -92,7 +65,7 @@
                         <div class="projects-wrapper-gallery-content">
                         {%for project in object_list%}
                             <div class="row">
-                                <div class="col-md-6 filter-item {{project.filter.pk}}">
+                                <div class="col-md-6 filter-item {{project.filter_name.pk}}">
                                     <!-- Start Project Box Single Item -->
                                     <div class="project-box-single-item">
                                         <div class="img-box">
@@ -145,11 +118,7 @@
 
 
     <!-- Minify Version -->
-    <script src="{%static 'assets/js/vendor.min.js'%}"></script>
-    <script src="{%static 'assets/js/plugins.min.js'%}"></script>
 
-    <!--Main JS (Common Activation Codes)-->
-    <script src="{%static 'assets/js/main.js'%}"></script>
 {%endblock content%}
 
 </body>

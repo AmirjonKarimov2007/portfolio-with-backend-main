@@ -26,6 +26,7 @@ class HomePageView(ListView):
         context['statistics'] = Statics.objects.all()
         context['companies'] = Company.objects.all()
         context['projects'] = project
+        context['posts'] = Post.objects.all()[:4]
      
         return context
 # Services List
@@ -74,6 +75,9 @@ class ProjectPageView(ListView):
         context = super().get_context_data(**kwargs)
         context['social'] = SocialMarkets.objects.get(id=1)
         context['home_defaults'] =  HomeDefault.objects.all()
+        context['statistics'] = Statics.objects.all()
+
+        return context
 
 class ProjectDetailsView(DetailView):
     template_name = 'project-details.html'
@@ -82,6 +86,8 @@ class ProjectDetailsView(DetailView):
         context = super().get_context_data(**kwargs)
         context['social'] = SocialMarkets.objects.get(id=1)
         context['home_defaults'] =  HomeDefault.objects.all()
+        context['statistics'] = Statics.objects.all()
+
         return context
 
 from .models import Post,Category,BlogTag,Comment,Like
@@ -106,11 +112,9 @@ def rightblogview(request):
      'user_id': user_id,
      "categories":categories,
      "related_posts":related_posts,
-     ""
      }
      )
      
-
 
 def assign_user_id(request):
     if not request.session.get('user_id'):

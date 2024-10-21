@@ -505,72 +505,33 @@
 
                     <div class="blog-feed-display-wrapper">
                         <div class="row mb-n5">
+                            
+                            <!-- Start Blog Feed Single Item -->
+                            {%for post in posts%}
                             <div class="col-12 mb-5">
-                                <!-- Start Blog Feed Single Item -->
                                 <div class="blog-feed-single-item">
                                     <div class="inner-shape inner-shape-top-right"></div>
-                                    <a href="blog-details-sidebar-left.html" class="image">
-                                        <img src="{%static 'assets/images/blog/blog-feed-img-1.jpg'%}" alt="">
+                                    <a href="{%url 'blog-detail' post.pk%}" class="image">
+                                        <img src="{{post.image.url}}" alt="">
                                     </a>
                                     <div class="content-box">
                                         <div class="content">
                                             <div class="post-meta">
-                                                <a href="#" class="catagory">Business</a>
-                                                <a href="#" class="date">07 February, 2021</a>
+                                                <a href="#" class="catagory">{{post.category}}</a>
+                                                <a href="#" class="date">{{post.publish_date}}</a>
                                             </div>
-                                            <h4 class="title"><a href="blog-details-sidebar-left.html">Don't wait until you officially started
-                                                    business to line these up.</a></h4>
+                                            <h4 class="title"><a href="{%url 'blog-detail' post.pk%}">{{post.title}}</a></h4>
                                         </div>
-                                        <a href="blog-details-sidebar-left.html" class="btn btn-md btn-outline-one icon-space-left">Read More<i class="icofont-double-right"></i></a>
+                                        <a href="{%url 'blog-detail' post.pk%}" class="btn btn-md btn-outline-one icon-space-left">Read More<i class="icofont-double-right"></i></a>
                                     </div>
 
                                 </div>
                                 <!-- End Blog Feed Single Item -->
                             </div>
-                            <div class="col-12 mb-5">
-                                <!-- Start Blog Feed Single Item -->
-                                <div class="blog-feed-single-item">
-                                    <div class="inner-shape inner-shape-top-right"></div>
-                                    <a href="blog-details-sidebar-left.html" class="image">
-                                        <img src="{%static 'assets/images/blog/blog-feed-img-2.jpg'%}" alt="">
-                                    </a>
-                                    <div class="content-box">
-                                        <div class="content">
-                                            <div class="post-meta">
-                                                <a href="#" class="catagory">Business</a>
-                                                <a href="#" class="date">07 February, 2021</a>
-                                            </div>
-                                            <h4 class="title"><a href="blog-details-sidebar-left.html">Don't wait until you officially started
-                                                    business to line these up.</a></h4>
-                                        </div>
-                                        <a href="blog-details-sidebar-left.html" class="btn btn-md btn-outline-one icon-space-left">Read More<i class="icofont-double-right"></i></a>
-                                    </div>
+                            {%endfor%}
 
-                                </div>
-                                <!-- End Blog Feed Single Item -->
-                            </div>
-                            <div class="col-12 mb-5">
-                                <!-- Start Blog Feed Single Item -->
-                                <div class="blog-feed-single-item">
-                                    <div class="inner-shape inner-shape-top-right"></div>
-                                    <a href="blog-details-sidebar-left.html" class="image">
-                                        <img src="{%static 'assets/images/blog/blog-feed-img-3.jpg'%}" alt="">
-                                    </a>
-                                    <div class="content-box">
-                                        <div class="content">
-                                            <div class="post-meta">
-                                                <a href="#" class="catagory">Business</a>
-                                                <a href="#" class="date">07 February, 2021</a>
-                                            </div>
-                                            <h4 class="title"><a href="blog-details-sidebar-left.html">Don't wait until you officially started
-                                                    business to line these up.</a></h4>
-                                        </div>
-                                        <a href="blog-details-sidebar-left.html" class="btn btn-md btn-outline-one icon-space-left">Read More<i class="icofont-double-right"></i></a>
-                                    </div>
 
-                                </div>
-                                <!-- End Blog Feed Single Item -->
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -588,11 +549,7 @@
 
 
     <!-- Minify Version -->
-    <script src="{%static 'assets/js/vendor.min.js'%}"></script>
-    <script src="{%static 'assets/js/plugins.min.js'%}"></script>
 
-    <!--Main JS (Common Activation Codes)-->
-    <script src="{%static 'assets/js/main.js'%}"></script>
     {% endblock content%}
 
 </body>
