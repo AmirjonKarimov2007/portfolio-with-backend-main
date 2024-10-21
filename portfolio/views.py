@@ -241,21 +241,17 @@ def blogdetailsview(request,pk):
     return render(request,'blog-details-sidebar-right.html',data)
 
 from .forms import  ContactForm
-
+from .models import Contact
 def contactpageview(request):
-    if request.method == 'POST':
-       form = ContactForm(request.POST)
-       if form.is_valid():
-            form.save()
-            print(request.POST)
-            return HttpResponse()
-    form = ContactForm()
+    if request.POST:
+        return redirect('/')
     informations = SocialMarkets.objects.get(id=1)
     data = {
         'informations': informations,
-        'form':form
     }
     return render(request, 'contact.html', data)
 
-
-
+def cantact(request):
+    if request.POST:
+        return redirect('/')
+    return render(request,'contacs.html')
