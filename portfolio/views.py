@@ -239,19 +239,64 @@ def blogdetailsview(request,pk):
     }
 
     return render(request,'blog-details-sidebar-right.html',data)
-
+from aiogram import Bot
+from django import forms
+import asyncio
+from django.shortcuts import render, redirect
 from .forms import  ContactForm
-from .models import Contact
+from aiogram.types import InlineKeyboardButton,InlineKeyboardMarkup
+# Telegram bot tokeni va admin chat ID sini kiriting
+TELEGRAM_BOT_TOKEN = '6679509079:AAF8mJpLY_LBIXiHO9uLkGFBJ27fQe5pj3w'
+ADMIN_CHAT_ID = '5955950834'
+
+
+async def send_message_to_admin(form_data):
+    bot = Bot(token=TELEGRAM_BOT_TOKEN)  # Bot object
+    message = (
+        f"*Yangi kontakt formasi yuborildi!*\n\n"
+        f"*Ism:* {form_data['name']}\n"
+        f"*Email:* {form_data['email']}\n"
+        f"*Telefon:* {form_data['phone']}\n"
+        f"*Mavzu:* {form_data['subject']}\n"
+        f"*Xabar:* {form_data['message']}"
+    )
+
+    # Clean the phone number
+    phone_number = form_data['phone'].replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
+    if not phone_number.startswith("+"):
+        # Optionally, add a check to prepend country code if necessary
+        phone_number = "+998" + phone_number  # Adjust to your country's code
+
+    # Create the button
+    contact_btn = InlineKeyboardMarkup(row_width=1)
+    contact_btn.insert(InlineKeyboardButton(text="📞 Bog'lanish", url=f"t.me/{phone_number}"))
+
+    await bot.send_message(
+        chat_id=ADMIN_CHAT_ID,
+        text=message,
+        parse_mode='Markdown',
+        reply_markup=contact_btn
+    )
+
+    # Close the session
+    await bot.session.close()
+
+
 def contactpageview(request):
-    if request.POST:
-        return redirect('/')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form_data = form.cleaned_data
+            form.save()
+            asyncio.run(send_message_to_admin(form_data))  # Xabar yuborish
+            return redirect('/')
+
+    else:
+        form = ContactForm()
+
     informations = SocialMarkets.objects.get(id=1)
     data = {
         'informations': informations,
+        'form': form,
     }
     return render(request, 'contact.html', data)
-
-def cantact(request):
-    if request.POST:
-        return redirect('/')
-    return render(request,'contacs.html')
