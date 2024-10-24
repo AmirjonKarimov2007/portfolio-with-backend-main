@@ -295,8 +295,10 @@ def contactpageview(request):
         form = ContactForm()
 
     informations = SocialMarkets.objects.get(id=1)
+    social = SocialMarkets.objects.get(id=1)
     data = {
         'informations': informations,
+        'social': social,
         'form': form,
     }
     return render(request, 'contact.html', data)
