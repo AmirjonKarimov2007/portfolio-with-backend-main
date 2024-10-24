@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'portfolio',
+    'authentication',
     'defaults',
     
 ]
@@ -54,6 +55,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+import os
 
 TEMPLATES = [
     {

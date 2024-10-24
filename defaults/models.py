@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-
     
 class HomeDefault(models.Model):
     title = models.CharField(verbose_name="Sayt sarlavhasi",max_length=300)
