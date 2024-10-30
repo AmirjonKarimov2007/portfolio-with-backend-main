@@ -15,5 +15,4 @@ urlpatterns = [
     path('search/',search,name='search'),
     path('blog-detail/<int:pk>/',blogdetailsview,name='blog-detail'),
     path('contact/',contactpageview, name ='contact'),
-
 ]

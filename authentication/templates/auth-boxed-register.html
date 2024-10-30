@@ -65,49 +65,47 @@
               <div class="line"></div>
             </div>
             <div class="form-body mt-4">
-              <form class="row g-3">
-                <div class="col-12">
-                  <label for="inputUsername" class="form-label">Username</label>
-                  <input type="text" class="form-control" id="inputUsername" placeholder="John">
-                </div>
-                <div class="col-12">
-                  <label for="inputEmailAddress" class="form-label">Email Address</label>
-                  <input type="email" class="form-control" id="inputEmailAddress" placeholder="example@user.com">
-                </div>
-                <div class="col-12">
-                  <label for="inputChoosePassword" class="form-label">Password</label>
-                  <div class="input-group" id="show_hide_password">
-                    <input type="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password">
-                    <a href="javascript:;" class="input-group-text bg-transparent"><i class="bi bi-eye-slash-fill"></i></a>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <label for="inputSelectCountry" class="form-label">Country</label>
-                  <select class="form-select" id="inputSelectCountry" aria-label="Default select example">
-                    <option selected="">India</option>
-                    <option value="1">United Kingdom</option>
-                    <option value="2">America</option>
-                    <option value="3">Dubai</option>
-                  </select>
-                </div>
-                <div class="col-12">
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                    <label class="form-check-label" for="flexSwitchCheckChecked">I read and agree to Terms &amp; Conditions</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="d-grid">
-                    <button type="submit" class="btn btn-grd-info">Register</button>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="text-start">
-                    <p class="mb-0">Already have an account? <a href="{%url 'login'%}">Sign in here</a></p>
-                  </div>
-                </div>
-              </form>
+    <form class="row g-3" method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <div class="col-12">
+            <label for="inputUsername" class="form-label">{{ form.username.label }}</label>
+            {{ form.username }}
+        </div>
+        <div class="col-12">
+            <label for="inputEmailAddress" class="form-label">{{ form.email.label }}</label>
+            {{ form.email }}
+        </div>
+        <div class="col-12">
+            <label for="inputChoosePassword" class="form-label">{{ form.password.label }}</label>
+            <div class="input-group" id="show_hide_password">
+                {{ form.password }}
+                <a href="javascript:;" class="input-group-text bg-transparent"><i class="bi bi-eye-slash-fill"></i></a>
             </div>
+        </div>
+        <div class="col-12">
+            <label for="inputConfirmPassword" class="form-label">{{ form.password_confirm.label }}</label>
+            {{ form.password_confirm }}
+        </div>
+        <div class="col-12">
+            <div class="form-check form-switch">
+                {{ form.agree_terms }}
+                <label class="form-check-label" for="flexSwitchCheckChecked">{{ form.agree_terms.label }}</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="d-grid">
+                <button type="submit" class="btn btn-grd-info">Register</button>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="text-start">
+                <p class="mb-0">Already have an account? <a href="{% url 'login' %}">Sign in here</a></p>
+            </div>
+        </div>
+    </form>
+</div>
+
+
           </div>
         </div>
         <div class="col-lg-6 d-lg-flex d-none">

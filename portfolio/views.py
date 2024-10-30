@@ -246,12 +246,12 @@ from django.shortcuts import render, redirect
 from .forms import  ContactForm
 from aiogram.types import InlineKeyboardButton,InlineKeyboardMarkup
 # Telegram bot tokeni va admin chat ID sini kiriting
-TELEGRAM_BOT_TOKEN = '6679509079:AAF8mJpLY_LBIXiHO9uLkGFBJ27fQe5pj3w'
-ADMIN_CHAT_ID = '5955950834'
+import requests
 
+TELEGRAM_BOT_TOKEN = '6679509079:AAF8mJpLY_LBIXiHO9uLkGFBJ27fQe5pj3w'
+ADMIN_CHAT_ID = '1612270615'
 
 async def send_message_to_admin(form_data):
-    bot = Bot(token=TELEGRAM_BOT_TOKEN)  # Bot object
     message = (
         f"*Yangi kontakt formasi yuborildi!*\n\n"
         f"*Ism:* {form_data['name']}\n"
@@ -264,23 +264,29 @@ async def send_message_to_admin(form_data):
     # Clean the phone number
     phone_number = form_data['phone'].replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
     if not phone_number.startswith("+"):
-        # Optionally, add a check to prepend country code if necessary
         phone_number = "+998" + phone_number  # Adjust to your country's code
 
-    # Create the button
-    contact_btn = InlineKeyboardMarkup(row_width=1)
-    contact_btn.insert(InlineKeyboardButton(text="📞 Bog'lanish", url=f"t.me/{phone_number}"))
+    # Create the button URL
+    contact_url = f"t.me/{phone_number}"
 
-    await bot.send_message(
-        chat_id=ADMIN_CHAT_ID,
-        text=message,
-        parse_mode='Markdown',
-        reply_markup=contact_btn
+    # Create the button
+    contact_btn = {
+        "inline_keyboard": [[{"text": "📞 Bog'lanish", "url": contact_url}]]
+    }
+
+    # Send the message via Telegram API
+    response = requests.post(
+        f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage',
+        json={
+            "chat_id": ADMIN_CHAT_ID,
+            "text": message,
+            "parse_mode": 'Markdown',
+            "reply_markup": contact_btn
+        }
     )
 
-    # Close the session
-    await bot.session.close()
-
+    if response.status_code != 200:
+        print(f"Failed to send message: {response.text}")
 
 def contactpageview(request):
     if request.method == 'POST':
