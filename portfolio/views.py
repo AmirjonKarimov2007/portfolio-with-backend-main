@@ -96,6 +96,9 @@ class ProjectPageView(ListView):
         context['social'] = SocialMarkets.objects.get(id=1)
         context['home_defaults'] =  HomeDefault.objects.all()
         context['statistics'] = Statics.objects.all()
+        context['projects'] = Project.objects.all().distinct('filter_name')
+        # views.py faylida
+
 
         return context
 
@@ -126,12 +129,14 @@ def rightblogview(request):
     paginator = Paginator(posts,8)
     page_number = request.GET.get('page')
     page_obj =  paginator.get_page(page_number)
+    social = SocialMarkets.objects.get(id=1)
     
     return render(request,'blog-list-sidebar-right.html',context=
     {'posts': page_obj, 
      'user_id': user_id,
      "categories":categories,
      "related_posts":related_posts,
+     "social":social
      }
      )
      
@@ -170,12 +175,14 @@ def category_list(request,category_slug):
     paginator = Paginator(posts,10)
     page_number = request.GET.get('page')
     page_obj =  paginator.get_page(page_number)
+    social = SocialMarkets.objects.get(id=1)
 
     return render(request,'blog-list-sidebar-right.html',context={
         "slug":slug,
         "posts":page_obj,
         "categories":categories,
         "related_posts":related_posts,
+        "social":social
         })
 
 
@@ -189,7 +196,9 @@ def search(request):
     paginator = Paginator(posts,10)
     page_number = request.GET.get('page')
     page_obj =  paginator.get_page(page_number)
-    return render(request,"blog-list-sidebar-right.html",context={"related_posts":related_posts,"posts":page_obj,"categories":categories})
+    social = SocialMarkets.objects.get(id=1)
+
+    return render(request,"blog-list-sidebar-right.html",context={"related_posts":related_posts,"posts":page_obj,"categories":categories,"social":social})
 
 
 
@@ -229,12 +238,14 @@ def blogdetailsview(request,pk):
                 image = image
             )
     related_posts = Post.objects.filter(category=post.category).exclude(id__in=[0,post.id]).order_by('?')[:5]
+    social = SocialMarkets.objects.get(id=1)
 
     data = {
         "post":post,
         "categories":categories,
         "social_media":social_media,
-        "related_posts":related_posts
+        "related_posts":related_posts,
+        "social":social
         
     }
 

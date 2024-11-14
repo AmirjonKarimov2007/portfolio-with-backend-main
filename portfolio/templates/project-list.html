@@ -53,8 +53,9 @@
                     <div class="col-12">
                         <div class="projects-gallery-filter-nav">
                             <button class="btn btn-outline-secondary active" data-filter="*">All</button>
-                            {%for project in object_list%}
-                            <button class="btn btn-outline-secondary" data-filter=".{{ project.filter_name.pk }}">{{ project.filter_name.title }}</button>
+                            {%for project in projects%}
+                            <button class="btn btn-outline-secondary"
+                             data-filter=".{{ project.filter_name.pk }}">{{ project.filter_name.title }}</button>
                             {%endfor%}
                         </div>
 
