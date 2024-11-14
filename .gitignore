@@ -1,3 +1,5 @@
 venv
+.env
+_idea_
 .venv
 __pycache__

@@ -239,19 +239,17 @@ def blogdetailsview(request,pk):
     }
 
     return render(request,'blog-details-sidebar-right.html',data)
-from aiogram import Bot
 from django import forms
 import asyncio
 from django.shortcuts import render, redirect
 from .forms import  ContactForm
-from aiogram.types import InlineKeyboardButton,InlineKeyboardMarkup
 # Telegram bot tokeni va admin chat ID sini kiriting
 import requests
 
 TELEGRAM_BOT_TOKEN = '6679509079:AAF8mJpLY_LBIXiHO9uLkGFBJ27fQe5pj3w'
 ADMIN_CHAT_ID = '1612270615'
 
-async def send_message_to_admin(form_data):
+def send_message_to_admin(form_data):
     message = (
         f"*Yangi kontakt formasi yuborildi!*\n\n"
         f"*Ism:* {form_data['name']}\n"
@@ -294,7 +292,7 @@ def contactpageview(request):
         if form.is_valid():
             form_data = form.cleaned_data
             form.save()
-            asyncio.run(send_message_to_admin(form_data))  # Xabar yuborish
+            send_message_to_admin(form_data)
             return redirect('/')
 
     else:
