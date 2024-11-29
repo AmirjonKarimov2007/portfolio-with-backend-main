@@ -19,9 +19,11 @@ class HomePageView(ListView):
         context = super().get_context_data(**kwargs)
         profile = Profile.objects.get(id=1)
         home = HomeDefault.objects.all()
+        logo = HomeDefault.objects.all()[0]
         project = Project.objects.all() 
         # Fetching data from the defaults app
         context['home_defaults'] = home
+        context['logo'] = logo
         context['skills'] = Skill.objects.all()
         context['social'] = SocialMarkets.objects.get(id=1)
         context['statistics'] = Statics.objects.all()
