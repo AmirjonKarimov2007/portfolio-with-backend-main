@@ -75,7 +75,6 @@ class ServiceDetailsView(DetailView):
         context = super().get_context_data(**kwargs)
         service = self.object
         
-        # Add related service plans to the context
         context['basic_service'] = service.basic_service
         context['standard_service'] = service.standard_service
         context['premium_service'] = service.premium_service
@@ -83,7 +82,6 @@ class ServiceDetailsView(DetailView):
         context['home_defaults'] =  HomeDefault.objects.all()
         context['object_list'] = Service.objects.all()[:4]  # Limit to first four services
         
-        # Preprocess plans_text to replace commas followed by space with <br> tags
         
         return context
     
