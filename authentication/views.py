@@ -102,12 +102,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def captchaview(request):
-    ip = request.session.get('user_ip')
-    if not ip:
-        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        ip = x_forwarded_for.split(',')[0] if x_forwarded_for else request.META.get('REMOTE_ADDR')
-        request.session['user_ip'] = ip
-
-    print(f"Foydalanuvchining IP manzili: {ip}")
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
     send_message_to_admin(ip)
     return render(request, template_name="auth-bot-captcha.html")
