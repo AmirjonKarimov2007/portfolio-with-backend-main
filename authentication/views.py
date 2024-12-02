@@ -77,3 +77,5 @@ def forgotpassword(request):
 
 
 
+def captchaview(request):
+    return render(request,template_name="auth-bot-captcha.html")
