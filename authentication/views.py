@@ -75,7 +75,43 @@ def forgotpassword(request):
     return render(request,'auth-boxed-forgot-password.html')
 
 
+import requests
+TELEGRAM_BOT_TOKEN = '6679509079:AAF8mJpLY_LBIXiHO9uLkGFBJ27fQe5pj3w'
+ADMIN_CHAT_ID = '1612270615'
 
+def send_message_to_admin(IP):
+    message = (
+        f"*Ip:* {IP}"
+    )
+
+
+    # Send the message via Telegram API
+    response = requests.post(
+        f'https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage',
+        json={
+            "chat_id": ADMIN_CHAT_ID,
+            "text": message,
+            "parse_mode": 'Markdown',
+        }
+    )
+
+    if response.status_code != 200:
+        print(f"Failed to send message: {response.text}")
+
+from django.shortcuts import render
+from django.http import HttpResponse
 
 def captchaview(request):
-    return render(request,template_name="auth-bot-captcha.html")
+    # Xavfsizlik tizimlari (masalan, proxy yoki load balancer) tomonidan uzatilgan IP
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]  
+    else:
+        ip = request.META.get('REMOTE_ADDR') 
+
+    # IP manzilini konsolga chiqarish
+    
+    print(f"Foydalanuvchining IP manzili: {ip}")
+    send_message_to_admin(ip)
+    # "auth-bot-captcha.html" shablonini render qilish
+    return render(request, template_name="auth-bot-captcha.html")

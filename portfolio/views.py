@@ -255,8 +255,8 @@ import asyncio
 from django.shortcuts import render, redirect
 from .forms import  ContactForm
 # Telegram bot tokeni va admin chat ID sini kiriting
-import requests
 
+import requests
 TELEGRAM_BOT_TOKEN = '6679509079:AAF8mJpLY_LBIXiHO9uLkGFBJ27fQe5pj3w'
 ADMIN_CHAT_ID = '1612270615'
 
